@@ -8,7 +8,7 @@
 
 Le but de ce projet est de pouvoir référencer les cartes physiques du jeu Magic : the Gathering dans une application.
 L'utilisateur pourra faire des classeurs de collections et savoir facilement quelle carte il possède. Il pourra ensuite regarder chaque extension pour savoir lesquelles il lui manque. Il aura la possibilité de créer des decks et pourra voir si une carte est utilisée ou si elle attend dans un classeur.
-Pour avoir accès à toutes les informations des cartes et pour avoir les noms exacts une API sera utilisée (https://scryfall.com/docs/api), Conformément aux règles de l'Entreprise Wizard of the Coast possédant Magic : The Gathering il est possible d'utiliser les API pour faire du contenu de Fan à but non lucratif. (https://company.wizards.com/en/legal/fancontentpolicy)
+Pour avoir accès à toutes les informations des cartes et pour avoir les noms exacts une API sera utilisée, plusieurs ids sont disponible mais nous utiliserons le multiverse Id(https://scryfall.com/docs/api), Conformément aux règles de l'Entreprise Wizard of the Coast possédant Magic : The Gathering il est possible d'utiliser les API pour faire du contenu de Fan à but non lucratif. (https://company.wizards.com/en/legal/fancontentpolicy)
 
 L'objectif est de créer ce système de gestion de collection où les utilisateur pourront:
 * S'inscrire
@@ -26,12 +26,13 @@ L'objectif est de créer ce système de gestion de collection où les utilisateu
 |---|---|
 | 1 | Visualiser un Classeur rempli manuellement|
 | 2 | Effectuer des opérations CRUD à une carte dans la collection  |
-| 3 | Recherche de cartes (Dans la collection et Globalement) |
+| 3 | Integration de l'API (Visualisation des cartes -> recherche avancée) |
 | 4 | Visualiser chaque extension |
 | 5 | Remplir les extensions en fonction de la Collection |
 | 6 | s'inscrire |
 | 7 | Création de collection diverse (Liste) |
 | 8 | Création de decks |
 
+NB: Si l'intégration de l'API est trop fastidieuse, il sera toujours possible de travailler avec des données en dur. 
 
 (numéro plus haut = plus basse priorité)
