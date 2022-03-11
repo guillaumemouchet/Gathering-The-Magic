@@ -1,0 +1,53 @@
+@startuml
+skinparam classAttributeIconSize 0
+abstract class "Model" {
+    #id: int
+    +fetchOne()
+    +fetchAll()
+    +update()
+    +save()
+    +delete()
+    +searchId()
+    +getId(): int
+    {abstract} +asHTMLTableRow()
+}
+class Deck{
+    #user_id: int
+    #quantity: int
+    #card_id: int
+    #deck_id: int
+    +asHTMLTableRow()
+}
+class Collection{
+    #user_id: int
+    #owned: bool
+    #quantity: int
+    #card_id: int
+    +asHTMLTableRow()
+}
+class User{
+    -password: string
+    +authentification()
+    +asHTMLTableRow()
+}
+
+class UserController {
+    +login()
+}
+class CollectionController{
+    +parseUpdate()
+    +show()
+
+}
+class DeckController{
+    +parseUpdate()
+    +show()
+}
+class IndexController
+class AboutController
+class API
+
+Model <|-- Collection
+Model <|-- User
+Model <|-- Deck
+
