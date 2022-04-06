@@ -11,9 +11,9 @@
 <?php
 		foreach ($cards as $card) {
 			echo $card->asHTMLFlexBoxItem();
-			echo "<img src='public/images/Card.jpg'>";
+			//echo "<img src='./Card.jpg' alt='Blank Card'/>";
 			?>
-			
+			<img src="public/images/Card.jpg" alt="Blank Card"/>
 			<hr><?php
 		}
 		?>
