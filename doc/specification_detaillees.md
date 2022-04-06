@@ -1,7 +1,8 @@
 # Spécifications détaillées
 
 ### Sécurité
-Le visiteur ne pourra qu'avoir accès à la page de connexion, si i
+Le visiteur ne pourra qu'avoir accès à la page de connexion. 
+
 ## Connexion
 Afin de pouvoir accéder aux fonctionnalités de l'application, l'utilisateur doit se connecter. En effet, le site recense des collections et des decks personnels. Le mot-de-passe est stocké hashé dans la base de donnée. Possibilité d'implémenter une visualisation des decks sans connexion, afin de les partager par exemple. Dans un premier temps les utilisateurs sont créés en dur dans la base de donnée, puis il sera possible de les crééer ou modifier depuis le site.
 
