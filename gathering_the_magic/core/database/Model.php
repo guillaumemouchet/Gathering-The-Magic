@@ -12,8 +12,7 @@ abstract class Model
         $dbh = App::get('dbh');
 
 
-        $callback = function(string $_): string
-        {
+        $callback = function (string $_): string {
             return "?";
         };
 
@@ -26,16 +25,13 @@ abstract class Model
         $request = "INSERT INTO {$table} ({$keys}) VALUES ({$binding});";
         $statement = $dbh->prepare($request);
 
-        for($k = 1; $k<= count($values); $k++)
-        {
-            $statement->bindParam($k, $values[$k-1]);
+        for ($k = 1; $k <= count($values); $k++) {
+            $statement->bindParam($k, $values[$k - 1]);
         }
 
         $statement->execute();
-
-
     }
-    
+
     /**
      * SELECT * FROM
      * @param String $table Table name  
@@ -43,11 +39,11 @@ abstract class Model
     protected static function readAll($table)
     {
         $dbh = App::get('dbh');
-        $statement= $dbh->prepare("SELECT * FROM {$table};");
+        $statement = $dbh->prepare("SELECT * FROM {$table};");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
-    
+
     /**
      * SELECT * FROM X ORDER BY X
      * @param String $table Table name
@@ -59,9 +55,9 @@ abstract class Model
         $statement = $dbh->prepare("SELECT * FROM {$table} ORDER BY {$orderBy};");
         $statement->execute();
 
-        return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class()); 
+        return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
-    
+
     /**
      * SELECT * FROM X WHERE ID
      * @param String $table Table name
@@ -74,7 +70,39 @@ abstract class Model
         $statement->bindParam(':model_id', $id);
         $statement->execute();
 
-        return $statement->fetch(PDO::FETCH_CLASS, get_called_class());
+        return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
+    }
+
+    protected static function readByName($table, $name)
+    {
+        $dbh = App::get('dbh');
+        echo "reading".$name;
+        $statement = $dbh->prepare("SELECT * FROM {$table} WHERE name LIKE %:model_name%;");
+        $statement->bindParam(':model_name', $name);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
+    }
+    
+    protected static function search($table, $params)
+    {
+        $dbh = App::get('dbh');
+        $request = "SELECT * FROM {$table} WHERE ";
+        foreach ($params as $key => $value) {
+            if ($key != "binding") {
+                $request = $request . " " . $value;
+            }
+        }
+        $request = $request.";";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $test = "%{$value[0]}%";
+                $statement->bindParam(":".$key, $test, $value[1]);
+            }
+        }
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
     /**
@@ -85,26 +113,23 @@ abstract class Model
     protected static function update($table, $id, $params)
     {
         $dbh = App::get('dbh');
-        $callback = function(string $k):string
-        {
+        $callback = function (string $k): string {
             return "{$k}=:{$k}";
         };
 
         $keys = array_keys($params);
         $values = array_values($params);
-        $set_string =implode(", ", array_map($callback, $keys));
-        
+        $set_string = implode(", ", array_map($callback, $keys));
+
         $request = "UPDATE {$table} SET {$set_string} WHERE id=:model_id;";
         $statement = $dbh->prepare($request);
-        
-        for($k = 0; $k < count($values); $k++)
-        {
+
+        for ($k = 0; $k < count($values); $k++) {
             $statement->bindParam(":{$keys[$k]}", $values[$k]);
         }
         $statement->bindParam(":model_id", $id);
 
         $statement->execute();
-        
     }
 
     /**
@@ -115,12 +140,11 @@ abstract class Model
     protected static function delete($table, $id)
     {
         $dbh = App::get('dbh');
-        
+
         $request = "DELETE FROM {$table} WHERE id=:model_id;";
         $statement = $dbh->prepare($request);
         $statement->bindparan(':model_id', $id);
-        
+
         $statement->execute();
-        
     }
 }
