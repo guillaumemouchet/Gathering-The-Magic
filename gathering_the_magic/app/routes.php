@@ -10,4 +10,5 @@ $router->define([
   'decks' => 'DeckController',
   'parse_search_form' => 'AdvancedResearchController@parseSearchForm',
   'card' => 'AdvancedResearchController@show',
+  'parse_add_card' => 'CollectionController@parseAddCard'
 ]);

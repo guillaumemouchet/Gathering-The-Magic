@@ -33,47 +33,68 @@ class Collection extends Model
     {
         return $this->owned;
     }
+    /***********************
+            Setters
+    ***********************/
+    public function setUserId($id)
+    {
+        $this->user_id = $id;
+    }
+    public function setCardId($id)
+    {
+        $this->card_id = $id;
+    }
+    public function setQuantity($qty)
+    {
+        $this->quantity = $qty;
+    }
+    public function setOwned($owned)
+    {
+        $this->owned = $owned;
+    }
 
-    
     /***********************
         Public Methods
     ***********************/
+
+    public static function fetchById($id)
+    {
+        Collection::readById("user_collection", $id);
+    }
+
+    public static function fetchAll($id)
+    {
+        return Collection::readAll("user_collection");
+    }
+
+    public function save()
+    {
+        $values_collection_user = [
+            "user_id" => 1, //In the future will have to change to $_SESSION
+            "card_id" => $this->card_id,
+            "quantity" => $this->quantity,
+            "owned" => $this->owned
+        ];
+        $values_collection = [
+            "id" => 1
+        ];
+        echo "Saving into c \n";
+        Collection::create("collection", $values_collection);
+        echo "Saving into u_c \n";
+        Collection::create("user_collection", $values_collection_user);
+
+    }
+
     public function asHTMLFlexBoxItem()
     {
         $str = '';
-        $str .= '<div id="card'.$this->id.'" class="card>';
-        $str .= '<p><label class="card_id">'. urlencode($this->id). '</label></p>';
-        $str .= '<p><label class="card_name">'. htmlentities($this->name). '</label></p>';
-        $str .= '<p><label class="card_color">'. htmlentities($this->color). '</label></p>';
-        $str .= '<p><label class="card_cost">'. htmlentities($this->cost). '</label></p>';
-        $str .= '<p><label class="card_type">'. htmlentities($this->type). '</label></p>';
-        $str .= '<p><label class="card_description">'. htmlentities($this->description). '</label></p>';
-        $str .= '<p><label class="card_extension">'. htmlentities($this->extension). '</label></p>';
+        $str .= '<div id="card'.$this->card_id.'" class="card>';
+        $str .= "<a class=\"id\" href=\"card?id=" . urlencode($this->card_id) . "\">" . htmlentities($this->card_id) . "</a>";
+        //$str .= "<a class=\"card_id\" href=\"card?id=". urlencode($this->card_id)."\">". htmlentities($this->card_id). "</a>";
+        $str .= '<p><label class="quantity">Quantity: '. htmlentities($this->quantity). '</label></p>';
+        $str .= '<p><label class="owned">Owned: '. htmlentities($this->owned). '</label></p>';
         $str .= '</div>';
         return $str;
     }
-
-    public static function fetchAll()
-    {
-        return TestCard::readAll("test_card");
-        //Will implement a filter when user options are available
-    }
-
-    public static function fetchAllOrderBy($column)
-    {
-        return TestCard::readAllOrderBy("test_card", $column);
-    }
-
-    public static function fetchId($id)
-    {
-        return TestCard::readById("test_card", $id);
-    }
-
-    public static function searchCards($params)
-    {
-        return TestCard::search("test_card", $params);
-        //return TestCard::readByName("test_card","Chandra, Torch of defiance")
-    }
-    
     
 }
