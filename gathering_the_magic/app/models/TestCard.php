@@ -60,7 +60,10 @@ class TestCard extends Model
         $str = '';
         $str .= '<div id="card'.$this->id.'" class="card>';
         $str .= '<p><label class="card_id">'. urlencode($this->id). '</label></p>';
-        $str .= '<p><label class="card_name">'. htmlentities($this->name). '</label></p>';
+
+        //$str .= "<a class=\"id\" href=\"task?id=" . urlencode($this->id) . "\">" . htmlentities($this->id) . "</a>";
+        $str .= "<a class=\"card_name\" href=\"card?id=". urlencode($this->id)."\">". htmlentities($this->name). "</a>";
+
         $str .= '<p><label class="card_color">'. htmlentities($this->color). '</label></p>';
         $str .= '<p><label class="card_cost">'. htmlentities($this->cost). '</label></p>';
         $str .= '<p><label class="card_type">'. htmlentities($this->type). '</label></p>';
@@ -86,6 +89,11 @@ class TestCard extends Model
         return TestCard::readById("test_card", $id);
     }
 
+    public static function searchCards($params)
+    {
+        return TestCard::search("test_card", $params);
+        //return TestCard::readByName("test_card","Chandra, Torch of defiance")
+    }
     
     
 }
