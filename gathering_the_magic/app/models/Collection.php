@@ -73,10 +73,10 @@ class Collection extends Model
             "user_id" => 1, //In the future will have to change to $_SESSION
             "card_id" => $this->card_id,
             "quantity" => $this->quantity,
-            "owned" => $this->owned
+            "owned" => $this->owned,
         ];
         $values_collection = [
-            "id" => $this->card_id
+            "id" => $this->card_id,
         ];
         echo "Saving into c \n";
         Collection::create("collection", $values_collection);
@@ -89,12 +89,36 @@ class Collection extends Model
     {
         $str = '';
         $str .= '<div id="card'.$this->card_id.'" class="card>';
-        $str .= "<a class=\"id\" href=\"card?id=" . urlencode($this->card_id) . "\">" . htmlentities($this->card_id) . "</a>";
-        //$str .= "<a class=\"card_id\" href=\"card?id=". urlencode($this->card_id)."\">". htmlentities($this->card_id). "</a>";
+        
         $str .= '<p><label class="quantity">Quantity: '. htmlentities($this->quantity). '</label></p>';
         $str .= '<p><label class="owned">Owned: '. htmlentities($this->owned). '</label></p>';
+        $str .= "<p><a class=\"card_name\" href=\"CardCollection?id=". urlencode($this->card_id)."\">". urlencode($this->card_id). "</a></p>";
+
         $str .= '</div>';
+
         return $str;
     }
+
+    public function show()
+    {
+        if(isset($_GET["id"]) && ctype_digit($_GET["id"]))
+        {
+            $card = TestCard::fetchId($_GET["id"]);
+
+            if($card == null)
+            {
+                // raising an exception maybe not the best solution
+                throw new Exception("CARD NOT FOUND.", 1);
+            }
+        }
+        else {
+            throw new Exception("CARD NOT FOUND.", 1);
+        }
+
+        return Helper::view("CardCollection",[
+                'card' => $card,
+            ]);
+    }
+    
     
 }

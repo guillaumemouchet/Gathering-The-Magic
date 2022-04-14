@@ -18,5 +18,5 @@ return [
   //When using the VM:
   //'install_prefix' => 'php/gathering_the_magic',
   //Local dev:
-    'install_prefix' => 'awa-g1-gatheringthemagic/gathering_the_magic',
+    'install_prefix' => 'Projets/1_Semestre_De_Printemps/awa-g1-gatheringthemagic/gathering_the_magic', //'awa-g1-gatheringthemagic/gathering_the_magic',
 ];
