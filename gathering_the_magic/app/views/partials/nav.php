@@ -1,10 +1,16 @@
 <nav>
     <ul>
-        <li> <a href="/awa-g1-gatheringthemagic/gathering_the_magic/">Home</a></li>      
-        <li> <a href="/awa-g1-gatheringthemagic/gathering_the_magic/advanced_research">Advanced Research</a></li> 
-        <li> <a href="/awa-g1-gatheringthemagic/gathering_the_magic/collection">Collection</a></li> 
-        <li> <a href="/awa-g1-gatheringthemagic/gathering_the_magic/extensions">Extensions</a></li> 
-        <li> <a href="/awa-g1-gatheringthemagic/gathering_the_magic/decks">Decks</a></li> 
-   
+        <?php 
+        $str = '';
+        $str .= '<div>';
+        $str .= "<li><a href=\"\">". "Home"."</a>";
+        $str .= "<li><a href=\"advanced_research\">". "Advanced Research". "</a>";
+        $str .= "<li><a href=\"collection\">"." Collection" ."</a>";
+        $str .= "<li><a href=\"extensions\">". "Extensions". "</a>";
+        $str .= "<li><a href=\"decks\">". "Decks". "</a>";
+
+        $str .= '</div>';
+        echo $str;
+        ?>
     </ul>
 </nav>

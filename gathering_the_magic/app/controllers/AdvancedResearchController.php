@@ -48,11 +48,11 @@ class AdvancedResearchController
             if($card == null)
             {
                 // raising an exception maybe not the best solution
-                throw new Exception("TASK NOT FOUND.", 1);
+                throw new Exception("CARD NOT FOUND.", 1);
             }
         }
         else {
-            throw new Exception("TASK NOT FOUND.", 1);
+            throw new Exception("CARD NOT FOUND.", 1);
         }
 
         return Helper::view("ShowCard",[
