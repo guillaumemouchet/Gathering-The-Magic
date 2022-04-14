@@ -76,7 +76,7 @@ class Collection extends Model
             "owned" => $this->owned
         ];
         $values_collection = [
-            "id" => 1
+            "id" => $this->card_id
         ];
         echo "Saving into c \n";
         Collection::create("collection", $values_collection);
