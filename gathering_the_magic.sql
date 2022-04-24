@@ -1,4 +1,4 @@
--- Adminer 4.7.1 MySQL dump
+-- Adminer 4.3.1 MySQL dump
 
 SET NAMES utf8;
 SET time_zone = '+00:00';
@@ -11,6 +11,11 @@ CREATE TABLE `collection` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `collection` (`id`) VALUES
+(1),
+(2),
+(4),
+(7);
 
 DROP TABLE IF EXISTS `decks`;
 CREATE TABLE `decks` (
@@ -34,7 +39,7 @@ CREATE TABLE `test_card` (
 
 INSERT INTO `test_card` (`id`, `name`, `color`, `cost`, `type`, `description`, `extension`) VALUES
 (1,	'Chandra, Torch of defiance',	'R',	4,	'Legendary Planeswalker - Chandra',	'+1 - deal 2 damages to any target',	'Magic Origins'),
-(2,	'Yuriko, Tiger\'s shasow',	'B',	3,	'Legendary Creature - Ninja',	'{B}{U} Ninjutsu',	'Commander 2018'),
+(2,	'Yuriko, Tiger\'s shadow',	'B',	3,	'Legendary Creature - Ninja',	'{B}{U} Ninjutsu',	'Commander 2018'),
 (3,	'Hamza, Guardian of Arashin',	'W',	6,	'Legendary Creature - Elephant',	'This spell cost 1 less to cast for each creature with +1/+1 counter on it.',	'Commander Legends'),
 (4,	'Sol Ring',	'C',	1,	'Artifact',	'{tap} add {C}{C}',	'Commander Collection Green'),
 (5,	'Soul of the Harvest',	'G',	6,	'Creature - Elemental',	'Tample',	'Jumpstart'),
@@ -54,19 +59,24 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `user` (`id`, `password`, `username`) VALUES
+(1,	'pass',	'toto');
 
 DROP TABLE IF EXISTS `user_collection`;
 CREATE TABLE `user_collection` (
   `user_id` int(11) NOT NULL,
   `card_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  `owned` binary(1) NOT NULL,
+  `quantity` int(11) unsigned NOT NULL,
+  `owned` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`user_id`,`card_id`,`owned`),
   KEY `user_id` (`user_id`),
   KEY `card_id` (`card_id`),
   CONSTRAINT `user_collection_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE,
   CONSTRAINT `user_collection_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `test_card` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `user_collection` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
+(1,	4,	4,	'true');
 
 DROP TABLE IF EXISTS `user_deck`;
 CREATE TABLE `user_deck` (
@@ -83,4 +93,4 @@ CREATE TABLE `user_deck` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2022-04-13 14:52:47
+-- 2022-04-24 15:53:53
