@@ -7,6 +7,7 @@
 
 <form method="get" action="parse_search_form">
     <label>Card name: <input type="text" id="cardName" name="cardName"/></label>
+    <!-- The rest of the form is disabled for the moment since we want to work with the API for the research later on -->
     <label>Card type: <input type="text" id="cardType" name="cardType" disabled/></label>
 
     <label for="extension">Extension: </label>

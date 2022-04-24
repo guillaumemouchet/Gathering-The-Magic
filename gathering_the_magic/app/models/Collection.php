@@ -59,12 +59,46 @@ class Collection extends Model
 
     public static function fetchById($id)
     {
-        Collection::readById("user_collection", $id);
+        return Collection::readById("user_collection", $id);
     }
 
     public static function fetchAll($id)
     {
         return Collection::readAll("user_collection");
+    }
+
+    public static function isIn ($card_id, $user_id, $owned)
+    {
+        $params = [
+            "search" => "card_id = :card_id AND user_id = :user_id AND owned = :owned",
+            "binding" => [
+                "card_id" => [$card_id, PDO::PARAM_INT],
+                "user_id" => [$user_id, PDO::PARAM_INT],
+                "owned" => [$owned, PDO::PARAM_STR]
+            ]
+        ];
+        return Collection::exists("user_collection", $params);
+    }
+
+    public static function fetchQuantity ($card_id, $user_id, $owned)
+    {
+        $params = [
+            "binding" => [
+                "card_id" => [$card_id, PDO::PARAM_INT],
+                "user_id" => [$user_id, PDO::PARAM_INT],
+                "owned" => [$owned, PDO::PARAM_STR]
+            ]
+        ];
+        $dbh = App::get('dbh');
+        $request = "SELECT quantity FROM user_collection WHERE card_id = :card_id AND user_id = :user_id AND owned = :owned;";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $statement->bindParam(":".$key, $value[0], $value[1]);
+            }
+        }
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function save()
@@ -79,10 +113,29 @@ class Collection extends Model
             "id" => $this->card_id,
         ];
         echo "Saving into c \n";
-        Collection::create("collection", $values_collection);
+        try{
+            Collection::create("collection", $values_collection);
+        }
+        catch(Exception $e)
+        {
+            echo "Card already in DB";
+        }
         echo "Saving into u_c \n";
         Collection::create("user_collection", $values_collection_user);
+    }
 
+    public static function updateQuantity($params)
+    {
+        $dbh = App::get('dbh');
+        $request = "UPDATE user_collection SET quantity = :quantity WHERE card_id=:card_id AND user_id=:user_id AND owned=:owned;";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $statement->bindParam(":".$key, $value[0], $value[1]);
+            }
+        };
+        $statement->execute();
+        echo "Quantity updated";
     }
 
     public function asHTMLFlexBoxItem()
