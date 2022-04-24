@@ -95,5 +95,22 @@ class TestCard extends Model
         //return TestCard::readByName("test_card","Chandra, Torch of defiance")
     }
     
-    
+    public static function fetchName ($card_id)
+    {
+        $params = [
+            "binding" => [
+                "id" => [$card_id, PDO::PARAM_INT],
+            ]
+        ];
+        $dbh = App::get('dbh');
+        $request = "SELECT name FROM test_card WHERE id = :id;";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $statement->bindParam(":".$key, $value[0], $value[1]);
+            }
+        }
+        $statement->execute();
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
 }

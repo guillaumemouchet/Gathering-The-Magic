@@ -9,7 +9,7 @@
 				<img src="public/images/Card.jpg" alt="Blank Card"/>
 				<hr>
 <form method="post" >
-    <label>Quantity (between -100 and 100) <input type="number" id="quantity" name="quantity" min="-100" max="100"></label>
+    <label>Add/remove (between -100 and 100) <input type="number" id="quantity" name="quantity" min="-100" max="100"></label>
     
     <input type="hidden" id="card_id" name="card_id" value="<?php echo htmlentities($card[0]->getId());?>">
     <input type="hidden" id="user_id" name="user_id" value="1">

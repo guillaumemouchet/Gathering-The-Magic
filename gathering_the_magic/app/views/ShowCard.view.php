@@ -9,7 +9,7 @@
 				<img src="public/images/Card.jpg" alt="Blank Card"/>
 				<hr>
 <form method="post" action="parse_add_card">
-    <label>Quantity (between 1 and 100) <input type="number" id="quantity" name="quantity" min="1" max="100"></label>
+    <label>How many cards do you want to add (between 1 and 100) <input type="number" id="quantity" name="quantity" min="1" max="100"></label>
     <label>
         <label>Owned:<input type="radio" id="owned" name="possession" value="owned" checked></label>
         <label>Wishlist:<input type="radio" id="wishlist" name="possession" value="wishlist"></label>
