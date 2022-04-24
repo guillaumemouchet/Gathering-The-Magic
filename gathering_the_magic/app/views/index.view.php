@@ -5,18 +5,12 @@
 <h1>Home Page</h1>
 
 <p>
-    Displaying Test Cards
+    Welcome Gathering the Magic.
 </p>
 
-<?php
-		foreach ($cards as $card) {
-			echo $card->asHTMLFlexBoxItem();
-			//echo "<img src='./Card.jpg' alt='Blank Card'/>";
-			?>
-			<img src="public/images/Card.jpg" alt="Blank Card"/>
-			<hr><?php
-		}
-		?>
+<p>
+	On this website you can manage your collection and explore for new cards. (For the moment cards are hard coded, an API integration will be added)
+</p>
 
 
 <?php require('partials/footer.php') ?>

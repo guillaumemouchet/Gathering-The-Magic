@@ -4,9 +4,6 @@ class IndexController
 {
     public function index()
     {
-        $cards = TestCard::fetchAll();
-        return Helper::view("index", [
-            "cards" => $cards
-        ]);
+        return Helper::view("index");
     }
 }

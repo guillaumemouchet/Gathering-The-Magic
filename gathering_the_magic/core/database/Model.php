@@ -105,6 +105,27 @@ abstract class Model
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
+    protected static function exists($table, $params)
+    {
+        $dbh = App::get('dbh');
+        $request = "SELECT * FROM {$table} WHERE ";
+        foreach ($params as $key => $value) {
+            if ($key != "binding") {
+                $request = $request . " " . $value;
+            }
+        }
+        $request = $request.";";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $test = "{$value[0]}";
+                $statement->bindParam(":".$key, $test, $value[1]);
+            }
+        }
+        $statement->execute();
+        return $statement->fetchColumn();
+    }
+
     /**
      * UPDATE 
      * @param String $table Table name

@@ -4,10 +4,6 @@
 ?>
 <h1>Search result</h1>
 
-<p>
-    Displaying Test Cards
-</p>
-
 <?php
 		if(sizeof($cards) > 0)
 		{
