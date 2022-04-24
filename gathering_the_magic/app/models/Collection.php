@@ -112,15 +112,13 @@ class Collection extends Model
         $values_collection = [
             "id" => $this->card_id,
         ];
-        echo "Saving into c \n";
         try{
             Collection::create("collection", $values_collection);
         }
         catch(Exception $e)
         {
-            echo "Card already in DB";
+
         }
-        echo "Saving into u_c \n";
         Collection::create("user_collection", $values_collection_user);
     }
 
@@ -135,7 +133,19 @@ class Collection extends Model
             }
         };
         $statement->execute();
-        echo "Quantity updated";
+    }
+
+    public static function remove($params)
+    {
+        $dbh = App::get('dbh');
+        $request = "DELETE FROM user_collection WHERE card_id=:card_id AND user_id=:user_id AND owned=:owned;";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $statement->bindParam(":".$key, $value[0], $value[1]);
+            }
+        };
+        $statement->execute();
     }
 
     public function asHTMLFlexBoxItem()
@@ -145,7 +155,7 @@ class Collection extends Model
         
         $str .= '<p><label class="quantity">Quantity: '. htmlentities($this->quantity). '</label></p>';
         $str .= '<p><label class="owned">Owned: '. htmlentities($this->owned). '</label></p>';
-        $str .= "<p><a class=\"card_name\" href=\"CardCollection?id=". urlencode($this->card_id)."\">". urlencode($this->card_id). "</a></p>";
+        $str .= "<p><a class=\"card_name\" href=\"CardCollection?id=". urlencode($this->card_id)."&amp;owned=".urlencode($this->owned)."\">". urlencode($this->card_id). "</a></p>";
 
         $str .= '</div>';
 

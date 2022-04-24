@@ -12,5 +12,6 @@ $router->define([
   'card' => 'AdvancedResearchController@show',
   'CardCollection' => 'CollectionController@show',
   'parse_add_card' => 'CollectionController@parseAddCard',
-  'parse_remove_card' => 'CollectionController@parseRemovecard',
+  'parse_remove_card' => 'CollectionController@parseRemoveCard',
+  'parse_update_card' => 'CollectionController@parseUpdateCard',
 ]);
