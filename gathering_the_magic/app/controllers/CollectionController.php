@@ -31,7 +31,7 @@ class CollectionController
                 }
                 $collection->setUserId(1);
 
-                $exist = Collection::isIn($collection->getCardId(), $collection->getUserId(), $collection->getOwned());
+                //Looking if card is already in collection
                 try
                 {
                     if(isset($_POST['quantity']))
@@ -44,6 +44,7 @@ class CollectionController
                     return Helper::view("Collection", ["collection" => $collection]);
                     exit();
                 }
+                //Otherwise updates the cards quantity
                 catch(Exception $e)
                 {
                     $qty = Collection::fetchQuantity($collection->getCardId(), $collection->getUserId(), $collection->getOwned());
@@ -73,6 +74,10 @@ class CollectionController
             }
         }
     }
+
+    /**
+     * For the moment this method only implemets qty changes, will add in future possibility to switch from wishlist to owned
+     */
     public static function parseUpdateCard()
     {
         
@@ -102,6 +107,7 @@ class CollectionController
             }
         }
     }
+
     public static function parseRemoveCard()
     {
         if($_SERVER['REQUEST_METHOD'] === 'POST')
@@ -114,6 +120,11 @@ class CollectionController
                 ]
             ];
             Collection::remove($params);
+            //Cleaner delete when card is no longer in use
+            if(!Collection::contains($_POST['card_id']))
+            {
+                Collection::removeCollection($_POST['card_id']);
+            }
             $collection = Collection::fetchAll(1);
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
@@ -125,6 +136,7 @@ class CollectionController
             exit();
         }
     }
+    
     public function show()
     {
         if(isset($_GET["id"]) && ctype_digit($_GET["id"]))

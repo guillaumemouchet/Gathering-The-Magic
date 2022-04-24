@@ -164,7 +164,7 @@ abstract class Model
 
         $request = "DELETE FROM {$table} WHERE id=:model_id;";
         $statement = $dbh->prepare($request);
-        $statement->bindparan(':model_id', $id);
+        $statement->bindParam(':model_id', $id);
 
         $statement->execute();
     }

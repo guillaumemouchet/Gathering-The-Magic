@@ -5,7 +5,7 @@
 <h1><?php echo $card[0]->getName(); ?></h1>
 
 
-<?php echo $card[0]->asHTMLFlexBoxItem();//echo "<img src='./Card.jpg' alt='Blank Card'/>";	?>
+<?php echo $card[0]->asHTMLFlexBoxItem();?>
 				<img src="public/images/Card.jpg" alt="Blank Card"/>
 				<hr>
 <form method="post" >
