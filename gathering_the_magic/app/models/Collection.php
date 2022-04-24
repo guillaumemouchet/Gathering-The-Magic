@@ -33,6 +33,7 @@ class Collection extends Model
     {
         return $this->owned;
     }
+
     /***********************
             Setters
     ***********************/
@@ -56,7 +57,6 @@ class Collection extends Model
     /***********************
         Public Methods
     ***********************/
-
     public static function fetchById($id)
     {
         return Collection::readById("user_collection", $id);
@@ -65,19 +65,6 @@ class Collection extends Model
     public static function fetchAll($id)
     {
         return Collection::readAll("user_collection");
-    }
-
-    public static function isIn ($card_id, $user_id, $owned)
-    {
-        $params = [
-            "search" => "card_id = :card_id AND user_id = :user_id AND owned = :owned",
-            "binding" => [
-                "card_id" => [$card_id, PDO::PARAM_INT],
-                "user_id" => [$user_id, PDO::PARAM_INT],
-                "owned" => [$owned, PDO::PARAM_STR]
-            ]
-        ];
-        return Collection::exists("user_collection", $params);
     }
 
     public static function fetchQuantity ($card_id, $user_id, $owned)
@@ -99,6 +86,19 @@ class Collection extends Model
         }
         $statement->execute();
         return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
+    /**
+     * Used to check if card is still in use in user_collection, otherwise it will be deleted by removeCollection
+     */
+    public static function contains($card_id)
+    {
+        $dbh = App::get('dbh');
+        $request = "SELECT * FROM user_collection WHERE card_id = :card_id;";
+        $statement = $dbh->prepare($request);
+        $statement->bindParam(":card_id", $card_id, PDO::PARAM_INT);
+        $statement->execute();
+        return $statement->fetchColumn();
     }
 
     public function save()
@@ -146,6 +146,14 @@ class Collection extends Model
             }
         };
         $statement->execute();
+    }
+
+    /**
+     * Cleans the collection table when cards are no longer needed in the user_collection table
+     */
+    public static function removeCollection($card_id)
+    {
+        Collection::delete("collection", $card_id);
     }
 
     public function asHTMLFlexBoxItem()
