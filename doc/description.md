@@ -19,8 +19,25 @@ L'objectif est de créer ce système de gestion de collection où les utilisateu
 * Visualiser chaque extension pour savoir quelle carte il nous manque
 * Faire des decks de différents formats 
 
+## MaJ après le rendu intermédiaire (27.04.22)
 
-## Objectifs généraux priorisés
+Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le projet avec de nouveaux objectifs:
+* L'utilisateur peut ajouter ses propres cartes à la base de données
+* L'utilisateur reçoit une notification si une nouvelle carte est ajoutée à la base de données (système asynchrone)
+
+## Nouveaux objectifs priorisés
+
+| numéro | description |
+|---|---|
+| 1 | Retravailler la BDD pour pour transformer les test_cards en cards|
+| 2 | Ajout de nouvelles cartes par l'utilisateur  |
+| 3 | Retravailler la recherche avancée |
+| 4 | Notifications lors d'ajout d'une nouvelle carte à la BDD |
+| 5 | Mise en page CSS |
+| 6 | Intégration des utilisateurs |
+| 7 | Gestion de decks |
+
+## Anciens objectifs généraux priorisés
 
 | numéro | description |
 |---|---|
