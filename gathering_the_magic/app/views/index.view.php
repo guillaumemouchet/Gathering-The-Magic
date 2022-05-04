@@ -9,8 +9,9 @@
 </p>
 
 <p>
-	On this website you can manage your collection and explore for new cards. (For the moment cards are hard coded, an API integration will be added)
+	On this website you can manage your collection and explore for new cards.
 </p>
+
 
 
 <?php require('partials/footer.php') ?>
