@@ -14,12 +14,16 @@ class CollectionController
         if($_SERVER['REQUEST_METHOD'] === 'POST')
         {
             //New condition needed when user is implemented
-            if(isset($_POST['card_id']))
+            if(isset($_POST['card_id']) && ctype_digit($_POST['card_id']))  /* et y penser ailleurs */
             {
                 $collection = new Collection;
                 $collection->setCardId($_POST['card_id']);
                 if(isset($_POST['possession']))
-                {
+
+                    /* $collection->setOwned($_POST['possession'] == "owned") marche peut-etre
+                     * sinon $collection->setOwned($_POST['possession'] == "owned" ? 'true' : 'false')
+                     */
+                
                     if($_POST['possession'] == "owned")
                     {
                         $collection->setOwned('true');

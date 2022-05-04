@@ -25,3 +25,8 @@ return [
     //Benjamin:
     'install_prefix' => 'awa-g1-gatheringthemagic/gathering_the_magic',
 ];
+
+/* autre solution: creer un config.php-TEMPLATE dans le GIT avec les
+ * exemples mais pas de mots de passe, et chacun utilise un config.php
+ * PAS dans le GIT pour sa config locale effective!
+ */

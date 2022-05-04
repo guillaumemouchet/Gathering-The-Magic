@@ -1,5 +1,7 @@
 <?php
 
+/* une solution pour plus de genericite serait de creer une classe UserCollection */
+
 /**
  * Collection class contains a user's cards (id only)
  */
@@ -14,6 +16,10 @@ class Collection extends Model
     private $owned;
 
 
+    /* les getters et setters pourraient etre magiques,
+     * et meme definis dans le Model
+     * consulter par exemple: https://gitlab-etu.ing.he-arc.ch/isc/2021-22/niveau-2/applications-web-i/-/blob/master/04_PHPOO/exercices/__get.php
+     */
     /***********************
             Getters
      ***********************/

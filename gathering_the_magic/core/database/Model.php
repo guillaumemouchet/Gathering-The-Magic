@@ -1,7 +1,14 @@
 <?php
 
+/* commentaires generaux: parfois vous utilisez le bind positionnel ?
+ * parfois le bind nomme: standardiser et genericiser dans une
+ * fonction generique, eviter la repetition de code similaire
+ * dans les differentes fonctions
+ */
+
 abstract class Model
 {
+
     /**
      * Insertion into DB: INSERT INTO
      * @param String $table Table name
@@ -11,25 +18,20 @@ abstract class Model
     {
         $dbh = App::get('dbh');
 
-
-        $callback = function (string $_): string {
-            return "?";
-        };
-
-        $copyParams = array_map($callback, $params); //Pour chaque params on lui attribue un ? pour le binding
+        // on peut simplifier le code (mais voir aussi les commentaires
+        // generaux)
+        //Pour chaque params on lui attribue un ? pour le binding
+        $copyParams = array_map(function (x) {
+                                   return "?";
+                                }, $params);
 
         $binding = implode(", ", $copyParams); //binding need ? and value
-        $keys = implode(", ", array_keys($params)); //Only need the value
-        $values = array_values($params);
+        $keys = implode(", ", array_keys($params)); //Only need the key
 
         $request = "INSERT INTO {$table} ({$keys}) VALUES ({$binding});";
         $statement = $dbh->prepare($request);
 
-        for ($k = 1; $k <= count($values); $k++) {
-            $statement->bindParam($k, $values[$k - 1]);
-        }
-
-        $statement->execute();
+        $statement->execute(array_values($params));
     }
 
     /**
@@ -39,6 +41,15 @@ abstract class Model
     protected static function readAll($table)
     {
         $dbh = App::get('dbh');
+
+        /* on pourrait imaginer, pour se passer de $table comme argument:
+           $table = strtolower(get_called_class());
+           $table = remplacer ([A-Z][a-z0-9]+)([A-Z][a-z0-9]+) par
+                    $1_$2 (cf preg_replace)
+           -- de preference dans une fonction generique de Model
+         */
+         
+        preg_replace("([A-Z].*?[A-Z]
         $statement = $dbh->prepare("SELECT * FROM {$table};");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
@@ -76,7 +87,11 @@ abstract class Model
     protected static function readByName($table, $name)
     {
         $dbh = App::get('dbh');
-        echo "reading".$name;
+        /* bien se rappeler qu'alors $name peut contenir des % aussi, si voulu,
+         * readbyName est alors readbyNamePattern plutot
+         * les % devraient alors etre ajoutés par l'appelant plutot qu'ici.
+         * sinon utiliser un simple "="
+         */
         $statement = $dbh->prepare("SELECT * FROM {$table} WHERE name LIKE %:model_name%;");
         $statement->bindParam(':model_name', $name);
         $statement->execute();
@@ -105,6 +120,7 @@ abstract class Model
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
+    /* ne semble pas utilisee */
     protected static function exists($table, $params)
     {
         $dbh = App::get('dbh');

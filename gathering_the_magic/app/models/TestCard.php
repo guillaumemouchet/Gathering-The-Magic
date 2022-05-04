@@ -62,7 +62,8 @@ class TestCard extends Model
         $str .= '<p><label class="card_id">'. urlencode($this->id). '</label></p>';
 
         //$str .= "<a class=\"id\" href=\"task?id=" . urlencode($this->id) . "\">" . htmlentities($this->id) . "</a>";
-        $str .= "<a class=\"card_name\" href=\"card?id=". urlencode($this->id)."\">". htmlentities($this->name). "</a>";
+        /* c'est plus joli sans backslashes, non? */
+        $str .= '<a class="card_name" href="card?id='. urlencode($this->id).'">'. htmlentities($this->name). "</a>";
 
         $str .= '<p><label class="card_color">'. htmlentities($this->color). '</label></p>';
         $str .= '<p><label class="card_cost">'. htmlentities($this->cost). '</label></p>';

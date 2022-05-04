@@ -23,7 +23,7 @@ class AdvancedResearchController
                     if($_GET['cardName'] != null || $_GET['cardName'] != " ")
                     {
 
-                        $searchStmt .='name LIKE :name';
+                        $searchStmt .='name LIKE :name'; /* LIKE est dangereux car name peut contenir un ou plusieurs %, s'il n'y a pas de bonne raison, utiliser "=" */
                     }
                 }
             }
