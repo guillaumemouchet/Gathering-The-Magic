@@ -1,6 +1,6 @@
 <?php
 require_once "app/models/Collection.php";
-require_once "app/models/TestCard.php";
+require_once "app/models/Card.php";
 class CollectionController
 {
     public function index()
@@ -85,7 +85,7 @@ class CollectionController
         {
             $qty = Collection::fetchQuantity($_POST['card_id'], $_POST['user_id'], $_POST['owned']);
             $qty = $qty['quantity'] + $_POST['quantity'];
-            if($qty < 0)
+            if($qty <= 0)
             {
                 CollectionController::parseRemoveCard();
                 exit();
@@ -120,11 +120,7 @@ class CollectionController
                 ]
             ];
             Collection::remove($params);
-            //Cleaner delete when card is no longer in use
-            if(!Collection::contains($_POST['card_id']))
-            {
-                Collection::removeCollection($_POST['card_id']);
-            }
+            
             $collection = Collection::fetchAll(1);
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
@@ -142,7 +138,7 @@ class CollectionController
         if(isset($_GET["id"]) && ctype_digit($_GET["id"]))
         {
             
-            $card = TestCard::fetchId($_GET["id"]);
+            $card = Card::fetchId($_GET["id"]);
             if($card == null)
             {
                 // raising an exception maybe not the best solution

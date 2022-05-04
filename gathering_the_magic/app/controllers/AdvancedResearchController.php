@@ -1,5 +1,5 @@
 <?php
-require_once "app/models/TestCard.php";
+require_once "app/models/Card.php";
 class AdvancedResearchController
 {
     public function index()
@@ -35,7 +35,7 @@ class AdvancedResearchController
                 "name" => [$_GET['cardName'] , PDO::PARAM_STR]
             ]
             ];
-        $cards = TestCard::searchCards($params);
+        $cards = Card::searchCards($params);
         return Helper::view("ShowCards", ["cards" => $cards]);
     }
 
@@ -43,7 +43,7 @@ class AdvancedResearchController
     {
         if(isset($_GET["id"]) && ctype_digit($_GET["id"]))
         {
-            $card = TestCard::fetchId($_GET["id"]);
+            $card = Card::fetchId($_GET["id"]);
 
             if($card == null)
             {

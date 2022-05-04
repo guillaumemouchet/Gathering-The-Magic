@@ -1,5 +1,5 @@
 <?php
-require_once "app/models/TestCard.php";
+require_once "app/models/Card.php";
 class IndexController
 {
     public function index()
