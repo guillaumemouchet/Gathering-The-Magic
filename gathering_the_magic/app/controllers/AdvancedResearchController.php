@@ -20,6 +20,7 @@ class AdvancedResearchController
             {
                 if(isset($_GET['cardName']))
                 {
+                    //Method in model
                     if($_GET['cardName'] != null || $_GET['cardName'] != " ")
                     {
 

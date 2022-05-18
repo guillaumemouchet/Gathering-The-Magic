@@ -14,4 +14,6 @@ $router->define([
   'parse_add_card' => 'CollectionController@parseAddCard',
   'parse_remove_card' => 'CollectionController@parseRemoveCard',
   'parse_update_card' => 'CollectionController@parseUpdateCard',
+  'new_card' => 'CardController',
+  'parse_new_card' => 'CardController@parseNewCard',
 ]);

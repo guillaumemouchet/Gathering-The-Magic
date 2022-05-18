@@ -2,6 +2,16 @@
 
 abstract class Model
 {
+    function __get($name)
+    {
+        return $this->$name;
+    }
+
+    function __set($name, $value)
+    {
+        $this->$name = $value;
+    }
+
     /**
      * Insertion into DB: INSERT INTO
      * @param String $table Table name
@@ -83,7 +93,16 @@ abstract class Model
 
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
-    
+
+    /**
+     * @return 1 if % symbol is found in user input
+     */
+    public static function checkPercent($input)
+    {
+        $pattern = "[%]";
+        return preg_match($pattern, $input);
+    }
+
     protected static function search($table, $params)
     {
         $dbh = App::get('dbh');
