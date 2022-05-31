@@ -112,4 +112,9 @@ class Card extends Model
         return $statement->fetchAll(PDO::FETCH_COLUMN);
     }
 
+    publIC function save()
+    {
+        
+    }
+
 }
