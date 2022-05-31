@@ -35,6 +35,7 @@ class CardController
                //CARDNAME
                if($this->controlText($_POST['cardName']))
                {
+                   //Magic setter ;)
                    $card->name = $_POST['cardName'];
                }
                else
@@ -69,7 +70,7 @@ class CardController
                 //CMC
                 if(isset($_POST['cmc']))
                 {
-                //Method in model
+                //Method in model //???
                     if(ctype_digit($_POST['cmc']))
                     {
                         $card->cost = $_POST['cmc'];   
