@@ -26,17 +26,17 @@ class CardController
 
     public function parseNewCard()
     {
-        echo "BONJOUR";
         $card = new Card();
         if($_SERVER['REQUEST_METHOD']==='POST')
         {
            if(count($_POST) > 0)
            {
+               
                //CARDNAME
                if($this->controlText($_POST['cardName']))
                {
                    //Magic setter ;)
-                   $card->name = $_POST['cardName'];
+                   $card->setName($_POST['cardName']);
                }
                else
                {
@@ -47,7 +47,7 @@ class CardController
                 //CARDTYPE
                 if($this->controlText($_POST['cardType']))
                 {
-                    $card->type = $_POST['cardType'];
+                    $card->setType($_POST['cardType']);
                 }
                 else
                 {
@@ -58,7 +58,7 @@ class CardController
                 //EXTENSION
                 if($this->controlText($_POST['extension']))
                 {
-                    $card->extension = $_POST['extension'];
+                    $card->setExtension($_POST['extension']);
                 }
                 else
                 {
@@ -70,10 +70,9 @@ class CardController
                 //CMC
                 if(isset($_POST['cmc']))
                 {
-                //Method in model //???
                     if(ctype_digit($_POST['cmc']))
                     {
-                        $card->cost = $_POST['cmc'];   
+                        $card->setCost($_POST['cmc']);   
                     } 
                 }
 
@@ -81,12 +80,44 @@ class CardController
 
                 if(isset($_POST['white']))
                 {
-                //Method in model //???
-
-                     $card->setColor($_POST['white']);   
-                    
+                    echo $_POST['white'];
+                    $card->setColor($_POST['white']);   
+                }
+                if(isset($_POST['blue']))
+                {
+                    $card->setColor($_POST['blue']);   
+                }
+                if(isset($_POST['black']))
+                {
+                    $card->setColor($_POST['black']);   
+                }
+                if(isset($_POST['red']))
+                {
+                    $card->setColor($_POST['red']);   
+                }
+                if(isset($_POST['green']))
+                {
+                    $card->setColor($_POST['green']);   
                 }
                 
+                if($this->controlText($_POST['description']))
+                {
+                    //Magic setter ;)
+                    $card->setDescription($_POST['description']);
+                }
+                
+                $card->save();
+                $id = Card::fetchIdByName($card->getName())['id'];
+                $card->setId($id);
+                foreach($card->getColor() as $c)
+                {
+                    echo "NewColor: ".$c."end";
+                    $card->saveColor($c); 
+                }
+                
+                echo "Card added succesfully";
+                exit();
+
             }  
         }
         

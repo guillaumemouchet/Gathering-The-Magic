@@ -13,11 +13,11 @@
 	<label>CMC: <input type="number" id="cmc" name="cmc" min ='0'></label>
 
     <label>Color: </label> 
-    <label>White<input type="checkbox" id="white" name="white" ></label>
-    <label>Blue<input type="checkbox" id="blue" name="blue" ></label>
-    <label>Black<input type="checkbox" id="black" name="black"></label>
-    <label>Red<input type="checkbox" id="red" name="red" ></label>
-    <label>Green<input type="checkbox" id="green" name="green" ></label>
+    <label>White<input type="checkbox" id="white" name="white" value="white" ></label>
+    <label>Blue<input type="checkbox" id="blue" name="blue" value="blue"></label>
+    <label>Black<input type="checkbox" id="black" name="black" value="black"></label>
+    <label>Red<input type="checkbox" id="red" name="red" value="red"></label>
+    <label>Green<input type="checkbox" id="green" name="green" value="green"></label>
 
 	<label>Description: <input type="text" id="description" name="description" pattern="[^%]+"></label>
 
