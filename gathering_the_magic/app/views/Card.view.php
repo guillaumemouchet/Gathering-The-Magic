@@ -22,6 +22,6 @@
 	<label>Description: <input type="text" id="description" name="description" pattern="[^%]+"></label>
 
 
-    <input type="submit" name="search" value="Search">
+    <input type="submit" name="search" value="Add new card !">
     
 </form>

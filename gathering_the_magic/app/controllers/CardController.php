@@ -1,5 +1,6 @@
 <?php
 require_once "app/models/Card.php";
+require_once "app/models/Collection.php";
 class CardController
 {
     public function index()
@@ -12,15 +13,22 @@ class CardController
     {
         if(isset($name))
         {
-            //Method in model
-            if($name != null || $name != " ")
+            if(!ctype_space($name) && !empty($name))
             {
                 if(Card::checkPercent($name))
                 {
-                    return 0;
+                    return false;
                 }
-                return 1;
+                return true;
+            }
+            else
+            {
+                return false;
             } 
+        }
+        else 
+        {
+            return false;
         }
     }
 
@@ -33,36 +41,41 @@ class CardController
            {
                
                //CARDNAME
-               if($this->controlText($_POST['cardName']))
+               if(CardController::controlText($_POST['cardName']))
                {
-                   //Magic setter ;)
                    $card->setName($_POST['cardName']);
                }
                else
                {
                    //ERREUR -> retour en arrière avec le même form
+                   echo "Incorrect input";
+                   return Helper::view("card");
                    exit();
                }
 
                 //CARDTYPE
-                if($this->controlText($_POST['cardType']))
+                if(CardController::controlText($_POST['cardType']))
                 {
                     $card->setType($_POST['cardType']);
                 }
                 else
                 {
                     //ERREUR -> retour en arrière avec le même form
+                    echo "Incorrect input";
+                    return Helper::view("card");
                     exit();
                 }
 
                 //EXTENSION
-                if($this->controlText($_POST['extension']))
+                if(CardController::controlText($_POST['extension']))
                 {
                     $card->setExtension($_POST['extension']);
                 }
                 else
                 {
                     //ERREUR -> retour en arrière avec le même form
+                    echo "Incorrect input";
+                    return Helper::view("card");
                     exit();
                 }
 
@@ -80,7 +93,6 @@ class CardController
 
                 if(isset($_POST['white']))
                 {
-                    echo $_POST['white'];
                     $card->setColor($_POST['white']);   
                 }
                 if(isset($_POST['blue']))
@@ -102,7 +114,6 @@ class CardController
                 
                 if($this->controlText($_POST['description']))
                 {
-                    //Magic setter ;)
                     $card->setDescription($_POST['description']);
                 }
                 
@@ -111,14 +122,22 @@ class CardController
                 $card->setId($id);
                 foreach($card->getColor() as $c)
                 {
-                    echo "NewColor: ".$c."end";
                     $card->saveColor($c); 
                 }
                 
                 echo "Card added succesfully";
+                $collection = Collection::fetchAll(1);
+                return Helper::view("Collection", ["collection" => $collection]);
                 exit();
 
             }  
+            else
+            {
+                echo "Incorrect input";
+                $collection = Collection::fetchAll(1);
+                return Helper::view("Collection", ["collection" => $collection]);
+                exit();
+            }
         }
         
     }
