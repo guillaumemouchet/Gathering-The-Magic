@@ -8,6 +8,7 @@
         $str .= "<li><a href=\"collection\">"." Collection" ."</a>";
         $str .= "<li><a href=\"extensions\">". "Extensions". "</a>";
         $str .= "<li><a href=\"decks\">". "Decks". "</a>";
+        $str .= "<li><a href=\"new_cards\">". "New Cards". "</a>";
 
         $str .= '</div>';
         echo $str;
