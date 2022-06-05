@@ -64,9 +64,15 @@ class Collection extends Model
         return Collection::readById("user_cards", $id);
     }
 
-    public static function fetchAll()
+    public static function fetchAll($id)
     {
-        return Collection::readAll("user_cards");
+        $params = [
+            "search" => "user_id=:user_id",
+            "binding" => [
+                "user_id" => [$id, PDO::PARAM_INT],
+            ]
+        ];
+        return Collection::search("user_cards",$params);
     }
 
     public static function fetchQuantity($card_id, $user_id, $owned)
