@@ -10,7 +10,7 @@ if (sizeof($collection) > 0) {
 	foreach ($collection as $card) {
 
 		echo $card->asHTMLFlexBoxItem();
-?>
+	?>
 
 
 		<hr><?php

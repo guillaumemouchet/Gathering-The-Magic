@@ -132,14 +132,14 @@ abstract class Model
             $i = 0;
             foreach ($params["binding"] as $key => $value) {
 
-                if (preg_match("/id./", $key) == 1) { //For some reseach we have to check multiple ids
+                if ($value[1] == 1) { //If its an int we don't put %
                     array_push($arrayTemp, "{$value[0]}"); //Since bindParam need a reference, we need to use an array
 
                 } else {
                     array_push($arrayTemp, "%{$value[0]}%"); //Since bindParam need a reference, we need to use an array
 
                 }
-                echo $value[0];
+                echo $value[0]. "      ". $value[1];
                 $statement->bindParam(':' . $key, $arrayTemp[$i++], $value[1]);
             }
         }
