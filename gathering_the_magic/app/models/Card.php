@@ -89,22 +89,23 @@ class Card extends Model
      ***********************/
     public function asHTMLFlexBoxItem()
     {
-
-
-        $str = '';
-        $str .= '<p><label class="card_id"> Card id: ' . urlencode($this->id) . '</label></p>';
-        $str .= "<a class=\"card_name\" href=\"card?id=" . urlencode($this->id) . "\"> Card name: " . htmlentities($this->name) . "</a>";
-        $str .= '<p><label class="card_color"> Color identity: ';
+        $str = '<div id="test">';
+        $str .= '<img src="public/images/Card.jpg" alt="Blank Card"/>';
+        $str .= '<div id="test1">
+        <p>Card id: <label class="card_id">'. urlencode($this->id). '</label></p>';
+        $str .= '<p> Card name: <a class="card_name" href="card?id='. urlencode($this->id).'">'. htmlentities($this->name). "</a></p>";
+        $str .= '<p>Color identity:<label class="card_color"> ';
         $assoc = Card::fetchColor($this->id);
         foreach ($assoc as $c) {
             $str .= htmlentities($c) . " ";
         }
         $str .= '</label></p>';
-        $str .= '<p><label class="card_cost"> CMC: ' . htmlentities($this->cost) . '</label></p>';
-        $str .= '<p><label class="card_type"> Type: ' . htmlentities($this->type) . '</label></p>';
-        $str .= '<p><label class="card_description"> Description: ' . htmlentities($this->description) . '</label></p>';
-        $str .= '<p><label class="card_extension"> Extension: ' . htmlentities($this->extension) . '</label></p>';
-        $str .= '</div>';
+        $str .= '<p>CMC: <label class="card_cost">'. htmlentities($this->cost). '</label></p>';
+        $str .= '<p>Type: <label class="card_type">'. htmlentities($this->type). '</label></p>';
+        $str .= '<p>Description: </p>';
+        $str .= '<p id="description"><label  class="card_description">'. htmlentities($this->description). '</label><p>';
+        $str .= '<p>Extension: <label class="card_extension">'. htmlentities($this->extension). '</label></p>';
+        $str .= '</div></div>';
         return $str;
     }
 
@@ -126,7 +127,7 @@ class Card extends Model
 
     public static function searchCards($params)
     {
-        return Card::search("cards", $params);
+     return Card::search("cards", $params);
         //return Card::readByName("cards","Chandra, Torch of defiance")
     }
 
@@ -196,7 +197,6 @@ class Card extends Model
 
     public function save()
     {
-
         $values_card = [
             "name" => $this->name,
             "cost" => $this->cost,
@@ -207,6 +207,42 @@ class Card extends Model
 
         Card::create("cards", $values_card);
     }
+    public static function fetchAllColor()
+    {
+        $dbh = App::get('dbh');
+        $request = "SELECT color.name FROM color;";
+        $statement = $dbh->prepare($request);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+    public static function fetchIdFromColor($params)
+    {
+        
+        $dbh = App::get('dbh');
+        $request = "SELECT card_id FROM cards_color WHERE";
+        foreach ($params as $key => $value) {
+            if ($key != "binding") {
+                $request .= ' ' . $value;
+            }
+        }
+        $request = $request.";";
+        $statement = $dbh->prepare($request);
+
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
+    }
+
+
+    public static function fetchExtension ()
+    {
+        $dbh = App::get('dbh');
+        $request = "SELECT DISTINCT extension FROM cards";
+        $statement = $dbh->prepare($request);
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_COLUMN);
+    }
+
     public function saveColor($color)
     {
         $values_color = [

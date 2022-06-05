@@ -8,10 +8,12 @@
 		if(sizeof($cards) > 0)
 		{
 			foreach ($cards as $card) {
+
 				echo $card->asHTMLFlexBoxItem();
 				?>
-				<img src="public/images/Card.jpg" alt="Blank Card"/>
-				<hr><?php
+				
+			
+			<hr><?php
 			}
 		}
 		else
