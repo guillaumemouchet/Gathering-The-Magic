@@ -158,6 +158,27 @@ class Card extends Model
         return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
+    public static function fetchByDate($date)
+    {
+
+        $params = [
+            "binding" => [
+                "timestamp" => [$date, PDO::PARAM_STR],
+            ]
+        ];
+        $dbh = App::get('dbh');
+        $request = "SELECT * FROM cards WHERE timestamp > :timestamp";
+        $statement = $dbh->prepare($request);
+        if (isset($params["binding"])) {
+            foreach ($params["binding"] as $key => $value) {
+                $statement->bindParam(":" . $key, $value[0], $value[1]);
+            }
+        }
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
+
+    }
+
     public static function fetchColor($card_id)
     {
         $params = [
