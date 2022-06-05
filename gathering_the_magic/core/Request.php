@@ -10,6 +10,6 @@ class Request
   {
     // trim: strip whitespace (or other characters) from the beginning
     // and end of a string
-    return trim($_SERVER['REQUEST_URI'],'/');
+    return trim($_SERVER['REQUEST_URI'], '/');
   }
 }

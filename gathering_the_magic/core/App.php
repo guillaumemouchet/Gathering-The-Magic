@@ -6,10 +6,8 @@ class App
 
     public static function get($key)
     {
-        if(! array_key_exists($key, static::$app))
-        {
+        if (!array_key_exists($key, static::$app)) {
             throw new Exception("No {$key} is in the registry.");
-
         }
         return static::$app[$key];
     }

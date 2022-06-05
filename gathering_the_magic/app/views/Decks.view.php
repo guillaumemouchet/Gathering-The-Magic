@@ -1,6 +1,7 @@
 <?php
-    $title = "Your decks";
-    require('partials/header.php')
+$title = "Your decks";
+require('partials/header.php');
+Helper::checkLogin();
 ?>
 <h1>Your decks</h1>
 

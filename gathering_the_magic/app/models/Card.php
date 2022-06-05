@@ -92,19 +92,19 @@ class Card extends Model
         $str = '<div id="test">';
         $str .= '<img src="public/images/Card.jpg" alt="Blank Card"/>';
         $str .= '<div id="test1">
-        <p>Card id: <label class="card_id">'. urlencode($this->id). '</label></p>';
-        $str .= '<p> Card name: <a class="card_name" href="card?id='. urlencode($this->id).'">'. htmlentities($this->name). "</a></p>";
+        <p>Card id: <label class="card_id">' . urlencode($this->id) . '</label></p>';
+        $str .= '<p> Card name: <a class="card_name" href="card?id=' . urlencode($this->id) . '">' . htmlentities($this->name) . "</a></p>";
         $str .= '<p>Color identity:<label class="card_color"> ';
         $assoc = Card::fetchColor($this->id);
         foreach ($assoc as $c) {
             $str .= htmlentities($c) . " ";
         }
         $str .= '</label></p>';
-        $str .= '<p>CMC: <label class="card_cost">'. htmlentities($this->cost). '</label></p>';
-        $str .= '<p>Type: <label class="card_type">'. htmlentities($this->type). '</label></p>';
+        $str .= '<p>CMC: <label class="card_cost">' . htmlentities($this->cost) . '</label></p>';
+        $str .= '<p>Type: <label class="card_type">' . htmlentities($this->type) . '</label></p>';
         $str .= '<p>Description: </p>';
-        $str .= '<p id="description"><label  class="card_description">'. htmlentities($this->description). '</label><p>';
-        $str .= '<p>Extension: <label class="card_extension">'. htmlentities($this->extension). '</label></p>';
+        $str .= '<p id="description"><label  class="card_description">' . htmlentities($this->description) . '</label><p>';
+        $str .= '<p>Extension: <label class="card_extension">' . htmlentities($this->extension) . '</label></p>';
         $str .= '</div></div>';
         return $str;
     }
@@ -127,7 +127,7 @@ class Card extends Model
 
     public static function searchCards($params)
     {
-     return Card::search("cards", $params);
+        return Card::search("cards", $params);
         //return Card::readByName("cards","Chandra, Torch of defiance")
     }
 
@@ -173,7 +173,6 @@ class Card extends Model
         }
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
-
     }
 
     public static function fetchColor($card_id)
@@ -218,7 +217,7 @@ class Card extends Model
 
     public static function fetchIdFromColor($params)
     {
-        
+
         $dbh = App::get('dbh');
         $request = "SELECT card_id FROM cards_color WHERE";
         foreach ($params as $key => $value) {
@@ -226,7 +225,7 @@ class Card extends Model
                 $request .= ' ' . $value;
             }
         }
-        $request = $request.";";
+        $request = $request . ";";
         $statement = $dbh->prepare($request);
 
         $statement->execute();
@@ -234,7 +233,7 @@ class Card extends Model
     }
 
 
-    public static function fetchExtension ()
+    public static function fetchExtension()
     {
         $dbh = App::get('dbh');
         $request = "SELECT DISTINCT extension FROM cards";

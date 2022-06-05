@@ -1,93 +1,86 @@
-h1
-{
-    color:#333;
+h1 {
+    color: #333;
     text-align: left;
     text-justify: auto;
-    text-decoration:underline;
+    text-decoration: underline;
 }
 
-body
-{
-	background-color: whitesmoke;
-	background-size: cover;
-	background-position:top;
-	background-repeat:no-repeat;
-	background-attachment:fixed;
+body {
+    background-color: whitesmoke;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
-.auth{
+.auth {
     border: 1px solid;
     color: whitesmoke;
     border-radius: 2px;
     font-family: Arial, Helvetica, sans-serif;
-  }
-  
-.sub{
+}
+
+.sub {
     font-family: Arial, Helvetica, sans-serif;
-  
-  }
+
+}
 
 nav {
     overflow: hidden;
     background-color: #333;
     margin-left: 15%;
     margin-right: 15%;
-  }
-  
-  /* Navbar links */
-  nav a {
+}
+
+/* Navbar links */
+nav a {
     float: left;
     display: block;
     color: whitesmoke;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-  }
-  
-  /* Links - change color on hover */
-  nav a:hover {
+}
+
+/* Links - change color on hover */
+nav a:hover {
     background-color: #ddd;
     color: black;
-  }
+}
 
 .wrapper {
     display: flex;
     grid-gap: 10px;
     justify-content: center;
-  }
+}
 
-form
-{
+form {
     vertical-align: top;
-	display: flex;
-	flex-direction: column;
-	align-items: left;
-	justify-content: space-around;
-	margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-around;
+    margin-bottom: 20px;
     margin-left: 15%;
     margin-right: 15%;
 }
 
-form label#color
-{
-    margin-left:5%;
+form label#color {
+    margin-left: 5%;
 }
 
-form label#title
-{
+form label#title {
     font-weight: bold;
     font-size: medium;
 }
 
-form label
-{
+form label {
     margin-top: 5px;
 }
 
-#btnSubmit
-{
+#btnSubmit {
     align-items: center;
-    
+
 }
 
 input[type=submit] {
@@ -96,52 +89,62 @@ input[type=submit] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
+    margin-top: 5px;
+}
 
 
-.wrapper
-{
+.wrapper {
     align-items: left;
-	display: flex;
-	flex-direction: row;
+    display: flex;
+    flex-direction: row;
     justify-content: left;
 
 }
-.wrapper select
-{
+
+.wrapper select {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-#test 
-{
+#test {
     align-items: left;
-	display: flex;
-	flex-direction: row;
+    display: flex;
+    flex-direction: row;
     margin-right: 10%;
     border-color: #333;
     border-style: solid;
 
 }
-#test1 
-{
+
+#test1 {
     color: #333;
     margin-left: 5%;
 }
-#test1 label
-{
+
+#test1 label {
     color: #333;
     font-weight: bold;
     font-size: medium;
 }
-#description
-{
+
+#description {
     white-space: normal;
     text-align: left;
-    
+
 }
-.card_name
-{
+
+.card_name {
     text-decoration: none;
 }
 
+.div-wrapper {
+    position: relative;
+    height: 300px;
+    width: 300px;
+}
+
+.div-wrapper img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
