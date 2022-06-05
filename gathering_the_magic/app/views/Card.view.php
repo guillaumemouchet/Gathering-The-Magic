@@ -14,6 +14,8 @@ Helper::checkLogin();
     <label id="title">CMC: <input type="number" id="cmc" name="cmc" min='0'></label>
 
 
+    <label id="title">Color: </label>
+
     <?php
     if (sizeof($colors) > 0) {
         foreach ($colors as $color) {
