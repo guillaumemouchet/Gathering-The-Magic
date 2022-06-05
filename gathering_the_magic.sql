@@ -13,22 +13,25 @@ CREATE TABLE `cards` (
   `type` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `extension` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `cards` (`id`, `name`, `cost`, `type`, `description`, `extension`) VALUES
-(1,	'Chandra, Torch of defiance',	4,	'Legendary Planeswalker - Chandra',	'+1 - deal 2 damages to any target',	'Magic Origins'),
-(2,	'Yuriko, Tiger\'s shasow',	3,	'Legendary Creature - Ninja',	'{B}{U} Ninjutsu',	'Commander 2018'),
-(3,	'Hamza, Guardian of Arashin',	6,	'Legendary Creature - Elephant',	'This spell cost 1 less to cast for each creature with +1/+1 counter on it.',	'Commander Legends'),
-(4,	'Sol Ring',	1,	'Artifact',	'{tap} add {C}{C}',	'Commander Collection Green'),
-(5,	'Soul of the Harvest',	6,	'Creature - Elemental',	'Tample',	'Jumpstart'),
-(6,	'Victory\'s Envoy',	5,	'Creature - Human Cleric',	'At the beginning of your upkeep put a +1/+1 counter on each creature you control.',	'Theros beyond Death'),
-(7,	'Beast Whisperer',	4,	'Creature - Elf Druid',	'Whenever you cast a creature spell draw a card',	'Time Spiral'),
-(8,	'Cathars\' Crusage',	5,	'Enchantment',	'Whenever a creature enter the battlefield under your control, put a +1/+1 counter on each creature you control.',	'Jumpstart'),
-(9,	'Asmoranomardicadaistinaculdacar',	0,	'Legendary Creature - Human',	'As long as you\'ve discarded a card this turn you may pay {B}{R} to cast this card.',	'Modern Horizon 2'),
-(10,	'Feasting Troll King',	6,	'Creature - Troll Noble',	'Vigilance, trample',	'Throne of Eldraine'),
-(11,	'Cauldron Familiar',	1,	'Creature - Cat',	'Whenever it enter the battlefield deal 1 damage to target opponent and gain 1 life.',	'Throne of Eldraine'),
-(12,	'Counterspell',	2,	'Instant',	'Counter target spell',	'M20');
+INSERT INTO `cards` (`id`, `name`, `cost`, `type`, `description`, `extension`, `timestamp`) VALUES
+(1,	'Chandra, Torch of defiance',	4,	'Legendary Planeswalker - Chandra',	'+1 - deal 2 damages to any target',	'Magic Origins',	'0000-00-00 00:00:00'),
+(2,	'Yuriko, Tiger\'s shadow',	3,	'Legendary Creature - Ninja',	'{B}{U} Ninjutsu',	'Commander 2018',	'0000-00-00 00:00:00'),
+(3,	'Hamza, Guardian of Arashin',	6,	'Legendary Creature - Elephant',	'This spell cost 1 less to cast for each creature with +1/+1 counter on it.',	'Commander Legends',	'0000-00-00 00:00:00'),
+(4,	'Sol Ring',	1,	'Artifact',	'{tap} add {C}{C}',	'Commander Collection Green',	'0000-00-00 00:00:00'),
+(5,	'Soul of the Harvest',	6,	'Creature - Elemental',	'Tample',	'Jumpstart',	'0000-00-00 00:00:00'),
+(6,	'Victory\'s Envoy',	5,	'Creature - Human Cleric',	'At the beginning of your upkeep put a +1/+1 counter on each creature you control.',	'Theros beyond Death',	'0000-00-00 00:00:00'),
+(7,	'Beast Whisperer',	4,	'Creature - Elf Druid',	'Whenever you cast a creature spell draw a card',	'Time Spiral',	'0000-00-00 00:00:00'),
+(8,	'Cathars\' Crusage',	5,	'Enchantment',	'Whenever a creature enter the battlefield under your control, put a +1/+1 counter on each creature you control.',	'Jumpstart',	'0000-00-00 00:00:00'),
+(9,	'Asmoranomardicadaistinaculdacar',	0,	'Legendary Creature - Human',	'As long as you\'ve discarded a card this turn you may pay {B}{R} to cast this card.',	'Modern Horizon 2',	'0000-00-00 00:00:00'),
+(10,	'Feasting Troll King',	6,	'Creature - Troll Noble',	'Vigilance, trample',	'Throne of Eldraine',	'0000-00-00 00:00:00'),
+(11,	'Cauldron Familiar',	1,	'Creature - Cat',	'Whenever it enter the battlefield deal 1 damage to target opponent and gain 1 life.',	'Throne of Eldraine',	'0000-00-00 00:00:00'),
+(12,	'Counterspell',	2,	'Instant',	'Counter target spell',	'M20',	'0000-00-00 00:00:00'),
+(15,	'Drogskol Reaver',	7,	'Creature - Spirit',	'Flying, double strike, lifelink',	'Dark ascension',	'0000-00-00 00:00:00'),
+(16,	'Lutri Spellchaser',	3,	'Legendary Creature - Otter',	'Companion',	'Ikoria: Lair of Behemoths',	'0000-00-00 00:00:00');
 
 DROP TABLE IF EXISTS `cards_color`;
 CREATE TABLE `cards_color` (
@@ -56,7 +59,13 @@ INSERT INTO `cards_color` (`card_id`, `color_id`) VALUES
 (9,	4),
 (10,	5),
 (11,	3),
-(12,	2);
+(12,	2),
+(15,	1),
+(15,	2),
+(16,	2),
+(16,	4),
+(23,	1),
+(24,	1);
 
 DROP TABLE IF EXISTS `color`;
 CREATE TABLE `color` (
@@ -106,7 +115,8 @@ CREATE TABLE `user_cards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `user_cards` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
-(1,	1,	6,	'true');
+(1,	3,	3,	'false'),
+(1,	4,	1,	'true');
 
 DROP TABLE IF EXISTS `user_deck`;
 CREATE TABLE `user_deck` (
@@ -123,4 +133,4 @@ CREATE TABLE `user_deck` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2022-05-04 07:30:44
+-- 2022-06-05 09:39:03
