@@ -2,12 +2,13 @@
 $title = "New Cards";
 require('partials/header.php');
 Helper::checkLogin();
+$_SESSION["last_timestamp"] = date('Y/m/d H:i:s',time());
 ?>
-<h1>New Cards added to database since <?= $_SESSION["last_timestamp"] ?></h1>
+<h1>New Cards added to database since <?=$_SESSION["last_timestamp"] ?></h1>
 
 <?php
-if (sizeof($cards) > 0) {
-	foreach ($cards as $card) {
+if (sizeof($_SESSION["newcards"])>0) {
+	foreach ($_SESSION["newcards"] as $card) {
 		echo $card->asHTMLFlexBoxItem();
 ?>
 		<hr>
