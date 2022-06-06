@@ -6,10 +6,13 @@ require('partials/header.php');
 <h1>Advanced research</h1>
 
 <form method="get" action="parse_search_form">
-    <label id="title">Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+" /></label>
-    <label id="title">Card type: <input type="text" id="cardType" name="cardType" pattern="[^%]+" /></label>
-
-    <div class="wrapper">
+    <div class="mb">
+        <label id="title">Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+" /></label>
+    </div>
+    <div class="mb">
+        <label id="title">Card type: <input type="text" id="cardType" name="cardType" pattern="[^%]+" /></label>
+    </div>
+    <div class="mb">
         <label id="title" for="extension">Extension: </label>
         <select name="extension" id="extension">
             <option value=""></option>
@@ -27,18 +30,21 @@ require('partials/header.php');
     </div>
 
     <label id="title">Color: </label>
-    <?php
-    if (sizeof($colors) > 0) {
-        foreach ($colors as $color) {
-    ?>
-            <label id="color"><input type="checkbox" id=<?= $color ?> name=<?= $color ?> value=<?= $color ?> /><?= $color ?></label>
+    <div class="mb form-check d-flex flex-column">
 
-    <?php
-        }
-    } ?>
+        <?php
+        if (sizeof($colors) > 0) {
+            foreach ($colors as $color) {
+        ?>
+                <label id="color"><input class="form-check-input" type="checkbox" id=<?= $color ?> name=<?= $color ?> value=<?= $color ?> /><?= $color ?></label>
 
-    <label id="title">Description: <input type="text" id="description" name="description" pattern="[^%]+" /></label>
-
+        <?php
+            }
+        } ?>
+    </div>
+    <div class="mb">
+        <label id="title">Description: <input type="text" id="description" name="description" pattern="[^%]+" /></label>
+    </div>
     <label id="btnSubmit"><input type="submit" name="search" value="Search" /></label>
 
 </form>

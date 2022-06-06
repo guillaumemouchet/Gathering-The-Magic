@@ -39,7 +39,9 @@ class CardController
                     $card->setName($_POST['cardName']);
                 } else {
                     //ERREUR -> retour en arrière avec le même form
-                    echo "Incorrect input";
+                    echo '<script language="javascript">';
+                    echo 'alert("Incorrect Input");';
+                    echo '</script>';
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
@@ -49,7 +51,9 @@ class CardController
                     $card->setType($_POST['cardType']);
                 } else {
                     //ERREUR -> retour en arrière avec le même form
-                    echo "Incorrect input";
+                    echo '<script language="javascript">';
+                    echo 'alert("Incorrect Input");';
+                    echo '</script>';
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
@@ -59,7 +63,9 @@ class CardController
                     $card->setExtension($_POST['extension']);
                 } else {
                     //ERREUR -> retour en arrière avec le même form
-                    echo "Incorrect input";
+                    echo '<script language="javascript">';
+                    echo 'alert("Incorrect Input");';
+                    echo '</script>';
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
@@ -71,6 +77,9 @@ class CardController
                         $card->setCost($_POST['cmc']);
                     }else
                     {
+                        echo '<script language="javascript">';
+                        echo 'alert("Incorrect Input");';
+                        echo '</script>';
                         return Helper::view("Card", ["colors" => $colors]);
                         exit(); 
                     }
@@ -99,6 +108,9 @@ class CardController
 
                 if(!(isset($_POST['white']) || isset($_POST['blue'])||isset($_POST['black'])||isset($_POST['red'])||isset($_POST['green'])||isset($_POST['colorless']))) //if any color are selected we need to go back
                 {
+                    echo '<script language="javascript">';
+                    echo 'alert("Incorrect Input with the colors");';
+                    echo '</script>';
                     return Helper::view("Card", ["colors" => $colors]);
                     exit(); 
                 }

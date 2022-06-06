@@ -89,23 +89,34 @@ class Card extends Model
      ***********************/
     public function asHTMLFlexBoxItem()
     {
-        $str = '<div id="test">';
-        $str .= '<img src="public/images/Card.jpg" alt="Blank Card"/>';
-        $str .= '<div id="test1">
-        <p>Card id: <label class="card_id">' . urlencode($this->id) . '</label></p>';
-        $str .= '<p> Card name: <a class="card_name" href="card?id=' . urlencode($this->id) . '">' . htmlentities($this->name) . "</a></p>";
-        $str .= '<p>Color identity:<label class="card_color"> ';
+
+
+
+        $str = '<div class="card mx-1">';
+        $str .= '<div class="row g-0">';
+        $str .= '<div class="col-mx-5">';
+        $str .= '<img src="public/images/Card.jpg" class="img-fluid rounded-start" alt="Blank Card">';
+        $str .= '</div>';
+        $str .= '<div class="card-body">';
+        //$str .= '<h5 class="card-title">Card id: <label class="card_id">' . urlencode($this->id) . '</label></h5>';
+        $str .= '<h5 class="card-text"> Card name: <a class="card_name" href="card?id=' . urlencode($this->id) . '">' . htmlentities($this->name) . "</a></h5>";
+        $str .= '<p class="card-text">Color identity: ';
         $assoc = Card::fetchColor($this->id);
         foreach ($assoc as $c) {
-            $str .= htmlentities($c) . " ";
+            $str .= "<a>".htmlentities($c) . " ";
         }
-        $str .= '</label></p>';
-        $str .= '<p>CMC: <label class="card_cost">' . htmlentities($this->cost) . '</label></p>';
-        $str .= '<p>Type: <label class="card_type">' . htmlentities($this->type) . '</label></p>';
-        $str .= '<p>Description: </p>';
-        $str .= '<p id="description"><label  class="card_description">' . htmlentities($this->description) . '</label><p>';
-        $str .= '<p>Extension: <label class="card_extension">' . htmlentities($this->extension) . '</label></p>';
-        $str .= '</div></div>';
+        $str .= '</a></p>';
+        $str .= '<p class="card-text">CMC: <a>' . htmlentities($this->cost) . '</a></p>';
+        $str .= '<p class="card-text">Type: <a>' . htmlentities($this->type) . '</a></p>';
+        $str .= '<p class="card-text">Description: </p>';
+        $str .= '<p>' . htmlentities($this->description) . '</p>';
+        $str .= '<p class="card-text">Extension: <a>' . htmlentities($this->extension) . '</a></p>';
+        $str .= '</div>';
+        $str .= '  </div>';
+        $str .= ' </div>';
+        $str .= ' </div>';
+
+
         return $str;
     }
 

@@ -161,13 +161,23 @@ class Collection extends Model
 
     public function asHTMLFlexBoxItem()
     {
-        $str = '<div id="test">';
-        $str .= '<img src="public/images/Card.jpg" alt="Blank Card"/>';
-        $str .= '<div id="test1">';
-        $str .= '<p>Card id:<label class="id"> ' . htmlentities($this->card_id) . '</label></p>';
-        $str .= "<p>Card Name: <a class=\"card_name\" href=\"CardCollection?id=" . urlencode($this->card_id) . "&amp;owned=" . urlencode($this->owned) . "\">" . htmlentities(Card::fetchName($this->card_id)['name']) . "</a></p>";
-        $str .= '<p>Quantity: <label class="quantity"> ' . htmlentities($this->quantity) . '</label></p>';
-        $str .= '<p>Owned: <label class="owned">' . htmlentities($this->owned) . '</label></p>';
+        $str = '<div class="card mx-1">';
+        $str .= '<div class="row g-0">';
+        $str .= '<div class="col-mx-5">';
+        $str .= '<img src="public/images/Card.jpg" class="img-fluid rounded-start" alt="Blank Card">';
+        $str .= '</div>';
+        $str .= '<div class="card-body">';
+        $str .= '<h5 class="card-title">Card id: <label class="card_id">' . htmlentities($this->card_id) . '</label></h5>';
+        $str .= '<p class="card-text">Card Name: <a class="card_name" href="CardCollection?id=' . urlencode($this->card_id) . "&amp;owned=" . urlencode($this->owned) . "\">" . htmlentities(Card::fetchName($this->card_id)['name']) . "</a></p>";
+        $str .= '<p class="card-text">Quantity: <label class="quantity"> ' . htmlentities($this->quantity) . '</label></p>';
+        $str .= '<p class="card-text">Owned: <label class="owned">' . htmlentities($this->owned) . '</label></p>';
+        $str .= '</div>';
+        $str .= '  </div>';
+        $str .= ' </div>';
+        $str .= ' </div>';
+
+
+        
 
 
         $str .= '</div></div>';
