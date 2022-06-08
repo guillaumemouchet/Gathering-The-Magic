@@ -10,19 +10,16 @@
 </head>
 
 <body>
-    <?php require_once 'app/models/Card.php'; ?>
     <script>
         setInterval(function() {
             <?php
             $_SESSION["newcards"] = Card::fetchByDate($_SESSION["last_timestamp"]);
             ?>
         }, 1000 * 5);
-        
-        if(isset($_SESSION["error"]))
-        {
-            alert($_SESSION["error"]);
-        }
     </script>
+    
+    <?php require_once 'app/models/Card.php'; ?>
+
 
 
 

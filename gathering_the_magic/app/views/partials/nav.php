@@ -40,6 +40,29 @@
 
 
                         </nav>
+
+
+                </div>
+                <div class="col my-auto">
+                        <?php
+                        if (isset($_SESSION['message'])) {
+                        ?>
+
+                                <p id="Test"><?= $_SESSION['message'] ?></p>
+                                <script>
+                                        var timeout;
+                                        var elem = document.getElementById("Test");
+                                        clearTimeout(timeout);
+                                        timeout = setTimeout(function() {
+                                                elem.innerHTML = "";
+                                        }, 3000);
+                                </script>
+                        <?php
+
+                                unset($_SESSION['message']);
+                                //header("refresh: 10");
+                        }
+                        ?>
                 </div>
         </div>
 </div>

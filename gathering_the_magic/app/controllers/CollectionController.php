@@ -18,7 +18,7 @@ class CollectionController
 
     public function parseAddCard()
     {
-        Helper::redirect("collection");
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //New condition needed when user is implemented
             if (isset($_POST['card_id'])) {
@@ -42,6 +42,7 @@ class CollectionController
                     $collection->save();
                     $_SESSION['message'] = "Card added succesfully to collection";
                     $collection = Collection::fetchAll($_SESSION["User_id"]);
+                    Helper::redirect("collection");
                     return Helper::view("Collection", ["collection" => $collection]);
                     exit();
                 }
@@ -61,12 +62,15 @@ class CollectionController
                         Collection::updateQuantity($params);
                         $_SESSION['message'] = "Card already in collection, quantity updated";
                         $collection = Collection::fetchAll($_SESSION["User_id"]);
+                        Helper::redirect("collection");
                         return Helper::view("Collection", ["collection" => $collection]);
                         exit();
                     }
                 }
             } else {
+                $_SESSION['message'] = "Error";
 
+                Helper::redirect("collection");
                 $collection = Collection::fetchAll($_SESSION["User_id"]);
                 return Helper::view("Collection", ["collection" => $collection]);
                 exit();
@@ -142,10 +146,13 @@ class CollectionController
             $card = Card::fetchId($_GET["id"]);
             if ($card == null) {
                 // raising an exception maybe not the best solution
-                throw new Exception("CARD NOT FOUND.", 1);
+                $_SESSION["message"] = "CARD NOT FOUND";
+                //throw new Exception("CARD NOT FOUND.", 1);
             }
         } else {
-            throw new Exception("CARD NOT FOUND.", 1);
+            $_SESSION["message"] = "CARD NOT FOUND";
+
+            //throw new Exception("CARD NOT FOUND.", 1);
         }
 
         return Helper::view("CardCollection", [
