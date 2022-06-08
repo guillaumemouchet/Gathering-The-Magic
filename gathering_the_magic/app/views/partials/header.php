@@ -10,6 +10,14 @@
 </head>
 
 <body>
+
+
+    <?php require_once 'app/models/Card.php'; ?>
+
+
+
+
+    <?php require('nav.php') ?>
     <script>
         setInterval(function() {
             <?php
@@ -17,10 +25,3 @@
             ?>
         }, 1000 * 5);
     </script>
-    
-    <?php require_once 'app/models/Card.php'; ?>
-
-
-
-
-    <?php require('nav.php') ?>
