@@ -5,12 +5,20 @@ class CollectionController
 {
     public function index()
     {
-        $collection = Collection::fetchAll($_SESSION["User_id"]);
-        return Helper::view("Collection", ["collection" => $collection]);
+        if (isset($_SESSION["User_id"])) //pour éviter l'affichage des erreurs de fetch
+        {
+            $collection = Collection::fetchAll($_SESSION["User_id"]);
+            return Helper::view("Collection", ["collection" => $collection]);
+        }else
+        {
+            return Helper::view("Collection");
+        }
+    
     }
 
     public function parseAddCard()
     {
+        Helper::redirect("collection");
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //New condition needed when user is implemented
             if (isset($_POST['card_id'])) {
@@ -58,6 +66,7 @@ class CollectionController
                     }
                 }
             } else {
+
                 $collection = Collection::fetchAll($_SESSION["User_id"]);
                 return Helper::view("Collection", ["collection" => $collection]);
                 exit();
@@ -74,7 +83,7 @@ class CollectionController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $qty = Collection::fetchQuantity($_POST['card_id'], $_SESSION["User_id"], $_POST['owned']);
-            
+
 
             if (isset($_POST['reduce'])) {
                 $qty = $qty['quantity'] - $_POST['quantity'];

@@ -15,7 +15,7 @@ Helper::checkLogin();
 
 <?php echo $card[0]->asHTMLFlexBoxItem(); ?>
 <hr>
-<form method="post" action="parse_add_card">
+<form class="form_display" method="post" action="parse_add_card">
     <label>How many cards do you want to add (between 1 and 100) <input type="number" id="quantity" name="quantity" min="1" max="100" value="1"></label>
     <label>
         <label>Owned:<input type="radio" id="owned" name="possession" value="owned" checked></label>

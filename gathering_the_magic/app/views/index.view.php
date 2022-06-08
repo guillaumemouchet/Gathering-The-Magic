@@ -14,21 +14,6 @@ require('partials/header.php');
     The Extensions and the Decks are not functionnal yet, they will be added in a second phase.</br>
 </p>
 
-<?php
-
-if (!isset($_SESSION["User_id"])) {
-?>
-    <form id="btnSubmit" method="post" action="login">
-        <input type="submit" name="login" value="Login !" />
-    </form>
-<?php
-} else { ?>
-    <form id="btnSubmit" method="post" action="parse_logout">
-        <input type="submit" name="logout" value="Logout!" />
-    </form>
-
-<?php
-} ?>
 <div><a href="about" ><img src="public/images/logoTrans.png" alt="Logo He-arc" /></div></a>
 
 <?php require('partials/footer.php') ?>

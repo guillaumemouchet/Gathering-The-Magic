@@ -90,8 +90,6 @@ class Card extends Model
     public function asHTMLFlexBoxItem()
     {
 
-
-
         $str = '<div class="card mx-1">';
         $str .= '<div class="row g-0">';
         $str .= '<div class="col-mx-5">';

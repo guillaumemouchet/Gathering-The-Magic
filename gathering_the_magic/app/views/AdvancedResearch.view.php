@@ -5,7 +5,7 @@ require('partials/header.php');
 
 <h1>Advanced research</h1>
 
-<form method="get" action="parse_search_form">
+<form class="form_display" method="get" action="parse_search_form">
     <div class="mb">
         <label id="title">Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+" /></label>
     </div>
@@ -48,6 +48,6 @@ require('partials/header.php');
     <label id="btnSubmit"><input type="submit" name="search" value="Search" /></label>
 
 </form>
-<form id="btnSubmit" method="post" action="new_card">
+<form class="form_display" id="btnSubmit" method="post" action="new_card">
     <input type="submit" name="add" value="Add new Card!" />
 </form>

@@ -21,7 +21,7 @@ if (sizeof($_SESSION["newcards"])>0) {
 }
 ?>
 
-<form id="btnSubmit" method="post" action="new_card">
+<form class="form_display" id="btnSubmit" method="post" action="new_card">
 	<input type="submit" name="add" value="Add new Card!" />
 </form>
 <?php require('partials/footer.php') ?>

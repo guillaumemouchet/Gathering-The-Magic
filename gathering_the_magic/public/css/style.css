@@ -23,8 +23,7 @@ body {
 nav {
     overflow: hidden;
     background-color: #333;
-    margin-left: 15%;
-    margin-right: 15%;
+
 }
 
 /* Navbar links */
@@ -43,7 +42,7 @@ nav #nav-text:hover {
     color: black;
 }
 
-form {
+.form_display {
     vertical-align: top;
     display: flex;
     flex-direction: column;
@@ -67,11 +66,11 @@ form {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-form label#color {
+.form_display label#color {
     margin-left: 6%;
 }
 
-form label#title {
+.form_display label#title {
     font-weight: bold;
     font-size: medium;
 }
@@ -80,6 +79,11 @@ form label#title {
 #btnSubmit {
     align-items: center;
 }
+#btnSubmit input[type=submit]:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
 
 input[type=submit] {
     background-color: #333;
@@ -99,6 +103,7 @@ input[type=submit] {
     border-style: solid;
 
 }
+
 
 .card-text{
     font-weight: bold;
