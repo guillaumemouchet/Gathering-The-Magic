@@ -5,6 +5,13 @@ Helper::checkLogin();
 ?>
 <h1><?php echo $card[0]->getName(); ?></h1>
 
+<?php
+    if(isset($_SESSION['message']))
+    {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+?>
 
 <?php echo $card[0]->asHTMLFlexBoxItem(); ?>
 <hr>

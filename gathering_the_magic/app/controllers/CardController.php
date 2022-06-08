@@ -105,14 +105,11 @@ class CardController
                 if (isset($_POST['colorless'])) {
                     $card->setColor($_POST['colorless']);
                 }
-
+                
+                //If user didn't select any color, the new card is assigned colorless
                 if(!(isset($_POST['white']) || isset($_POST['blue'])||isset($_POST['black'])||isset($_POST['red'])||isset($_POST['green'])||isset($_POST['colorless']))) //if any color are selected we need to go back
                 {
-                    echo '<script language="javascript">';
-                    echo 'alert("Incorrect Input with the colors");';
-                    echo '</script>';
-                    return Helper::view("Card", ["colors" => $colors]);
-                    exit(); 
+                    $card->setColor('colorless');
                 }
 
                 if (CardController::controlText($_POST['description'])) { // A card can have no description
@@ -121,17 +118,31 @@ class CardController
                 {
                     $card->setDescription("");
                 }
+                try
+                {
+                    $card->save();
+                    $id = Card::fetchIdByName($card->getName())['id'];
+                    $card->setId($id);
+                    foreach ($card->getColor() as $c) {
+                        $card->saveColor($c);
+                    }
+                    $_SESSION['message'] = "New card succesfully added to database";
 
-                $card->save();
-                $id = Card::fetchIdByName($card->getName())['id'];
-                $card->setId($id);
-                foreach ($card->getColor() as $c) {
-                    $card->saveColor($c);
+                    $array = [$card];
+
+                    return Helper::view("ShowCard", ["card" => $array]);
+                    exit();
+                }
+                catch (Exception $e) 
+                {
+                    $_SESSION['message'] = "Card already in database";
+                    $colors = Card::fetchAllColor();
+                    return Helper::view("Card", ["colors" => $colors]);
+                    exit();
                 }
 
-                $array = [$card];
-                return Helper::view("ShowCard", ["card" => $array]);
-                exit();
+
+
             } else {
                 return Helper::view("CardView");
                 exit();

@@ -4,7 +4,13 @@ require('partials/header.php');
 Helper::checkLogin();
 ?>
 <h1>Collection</h1>
-
+<?php
+    if(isset($_SESSION['message']))
+    {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+?>
 <?php
 if (sizeof($collection) > 0) {
 	foreach ($collection as $card) {

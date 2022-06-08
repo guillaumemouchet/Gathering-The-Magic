@@ -19,6 +19,7 @@ class UserController
                 if (User::authentification($_POST["user_input"], $_POST["password_input"])) {
                     return Helper::view("index");
                 } else {
+                    $_SESSION['message'] = "Wrong username or password";
                     return Helper::view("login");
                 }
             }

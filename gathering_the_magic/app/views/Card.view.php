@@ -5,7 +5,13 @@ Helper::checkLogin();
 ?>
 
 <h1>Add new Card to database</h1>
-
+<?php
+    if(isset($_SESSION['message']))
+    {
+        echo $_SESSION['message'];
+        unset($_SESSION['message']);
+    }
+?>
 <form method="post" action="parse_new_card">
     <div class="mb">
         <label id="title">Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+" required/></label>

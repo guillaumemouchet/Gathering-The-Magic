@@ -32,6 +32,7 @@ class CollectionController
                     }
 
                     $collection->save();
+                    $_SESSION['message'] = "Card added succesfully to collection";
                     $collection = Collection::fetchAll($_SESSION["User_id"]);
                     return Helper::view("Collection", ["collection" => $collection]);
                     exit();
@@ -50,6 +51,7 @@ class CollectionController
                             ]
                         ];
                         Collection::updateQuantity($params);
+                        $_SESSION['message'] = "Card already in collection, quantity updated";
                         $collection = Collection::fetchAll($_SESSION["User_id"]);
                         return Helper::view("Collection", ["collection" => $collection]);
                         exit();
@@ -94,6 +96,7 @@ class CollectionController
                     ]
                 ];
                 Collection::updateQuantity($params);
+                $_SESSION['message'] = "Card quantity changed succesfully";
                 $collection = Collection::fetchAll($_SESSION["User_id"]);
                 return Helper::view("Collection", ["collection" => $collection]);
                 exit();
@@ -112,7 +115,7 @@ class CollectionController
                 ]
             ];
             Collection::remove($params);
-
+            $_SESSION['message'] = "Card removed succesfully from collection";
             $collection = Collection::fetchAll($_SESSION["User_id"]);
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
