@@ -32,14 +32,16 @@ INSERT INTO `cards` (`id`, `name`, `cost`, `type`, `description`, `extension`, `
 (12,	'Counterspell',	2,	'Instant',	'Counter target spell',	'M20',	'0000-00-00 00:00:00'),
 (15,	'Drogskol Reaver',	7,	'Creature - Spirit',	'Flying, double strike, lifelink',	'Dark ascension',	'0000-00-00 00:00:00'),
 (16,	'Lutri Spellchaser',	3,	'Legendary Creature - Otter',	'Companion',	'Ikoria: Lair of Behemoths',	'0000-00-00 00:00:00'),
-(23,	'S',	3,	'S',	'1',	'S',	'2022-06-01 07:32:11'),
-(24,	'd',	2,	'd',	'3',	'd',	'2022-06-01 07:34:58'),
-(25,	'Chandra',	3,	'Creature',	'flip -> planeswalker',	'Kaladesh',	'2022-06-05 09:49:48'),
 (26,	'Archon of Sun\'s Grace',	4,	'Creature - Archon',	'Flying, lifelink',	'Theros - Beyond Death',	'2022-06-05 12:21:04'),
 (27,	'Seal of Cleansing',	2,	'Enchantment',	'Sacrifice Seal of Cleansing : Destroy target artifact or enchantment.',	'Time Spiral Remastered',	'2022-06-05 19:55:58'),
 (28,	'Portable Hole',	3,	'Artifact',	'Exile permanent with 2 or less CMC.',	'Dungeon and Dragon ',	'2022-06-05 20:43:20'),
 (29,	'Inquisition of Kozilek',	1,	'Sorcery',	'Target oponnent discard a card with 3 CMC or less from their hand.',	'Mystical Archive',	'2022-06-05 20:44:34'),
-(30,	'Soul guiding lantern',	1,	'Artifact',	'',	'Theros Beyond Death',	'2022-06-05 20:54:15');
+(30,	'Soul guiding lantern',	1,	'Artifact',	'',	'Theros Beyond Death',	'2022-06-05 20:54:15'),
+(31,	'Lurrus of the DreamRender',	3,	'Legendary Creature Hound',	'Companion',	'Ikoria Behemot Lair',	'2022-06-06 10:30:14'),
+(33,	'Urza\'s Saga',	0,	'Legendary Land - Saga',	'Saga Strange Stuff',	'Modern Horizon 2',	'2022-06-06 10:46:04'),
+(34,	'Magda, Brazen Outlaws',	2,	'Legendary Creature - Dwarf',	'Whenever a drawf taps create a treasure token.',	'Kaldheim',	'2022-06-06 10:47:40'),
+(35,	'Breakneck Berserker',	3,	'Creature _dwarf Berserker',	'Haste',	'Kaldheim',	'2022-06-06 20:17:39'),
+(44,	'Burning-Tree Emissary ',	2,	'Creature - Human Shaman ',	'Add red and green when it enters your battlefied',	'Dungeon and Dragon ',	'2022-06-08 17:59:59');
 
 DROP TABLE IF EXISTS `cards_color`;
 CREATE TABLE `cards_color` (
@@ -107,4 +109,4 @@ CREATE TABLE `user_deck` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
--- 2022-06-05 20:54:48
+-- 2022-06-08 18:44:54
