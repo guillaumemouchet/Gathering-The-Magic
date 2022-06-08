@@ -1,27 +1,30 @@
 <div class="container">
         <div class="row">
-                <div class="col-2 my-auto">
+                <div class="col my-auto">
                         <?php
-                        if (!isset($_SESSION["User_id"])) {
+                        if (isset($_SESSION['message'])) {
                         ?>
-                                <form method="post" action="login">
-                                        <input type="submit" name="login" value="Login!" />
-                                </form>
-                        <?php
-                        } else { ?>
-                                <form method="post" action="parse_logout">
-                                        <input type="submit" name="logout" value="Logout!" />
-                                </form>
 
+                                <p id="Test" class="text-danger"><?= $_SESSION['message'] ?></p>
+                                <script>
+                                        var timeout;
+                                        var elem = document.getElementById("Test");
+                                        clearTimeout(timeout);
+                                        timeout = setTimeout(function() {
+                                                elem.innerHTML = "";
+                                        }, 3000);
+                                </script>
                         <?php
-                        } ?>
+
+                                unset($_SESSION['message']);
+                                //header("refresh: 10");
+                        }
+                        ?>
                 </div>
                 <div class="col-16">
 
                         <nav>
-
                                 <a id="nav-text"><?= isset($_SESSION['Username']) ? $_SESSION['Username'] : "No one is logged in" ?></a>
-
                                 <a id="nav-text" href="home">Home</a>
                                 <a id="nav-text" href="advanced_research">Advanced Research</a>
                                 <a id="nav-text" href="collection">Collection</a>
@@ -43,26 +46,22 @@
 
 
                 </div>
-                <div class="col my-auto">
+                <div class="col-2 my-auto mx-auto">
                         <?php
-                        if (isset($_SESSION['message'])) {
+                        if (!isset($_SESSION["User_id"])) {
                         ?>
-
-                                <p id="Test"><?= $_SESSION['message'] ?></p>
-                                <script>
-                                        var timeout;
-                                        var elem = document.getElementById("Test");
-                                        clearTimeout(timeout);
-                                        timeout = setTimeout(function() {
-                                                elem.innerHTML = "";
-                                        }, 3000);
-                                </script>
+                                <form method="post" action="login">
+                                        <input type="submit" name="login" value="Login!" />
+                                </form>
                         <?php
+                        } else { ?>
+                                <form method="post" action="parse_logout">
+                                        <input type="submit" name="logout" value="Logout!" />
+                                </form>
 
-                                unset($_SESSION['message']);
-                                //header("refresh: 10");
-                        }
-                        ?>
+                        <?php
+                        } ?>
                 </div>
+
         </div>
 </div>
