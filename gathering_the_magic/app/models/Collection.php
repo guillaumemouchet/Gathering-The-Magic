@@ -118,18 +118,7 @@ class Collection extends Model
             "quantity" => $this->quantity,
             "owned" => $this->owned,
         ];
-        /*
-        $values_collection = [
-            "id" => $this->card_id,
-        ];
-        
-        try{
-            Collection::create("collection", $values_collection);
-        }
-        catch(Exception $e)
-        {
 
-        }*/
         Collection::create("user_cards", $values_collection_user);
     }
 
@@ -175,12 +164,7 @@ class Collection extends Model
         $str .= '  </div>';
         $str .= ' </div>';
         $str .= ' </div>';
-
-
-        
-
-
-        $str .= '</div></div>';
+  
 
         return $str;
     }
@@ -192,10 +176,13 @@ class Collection extends Model
 
             if ($card == null) {
                 // raising an exception maybe not the best solution
-                throw new Exception("CARD NOT FOUND.", 1);
+                $_SESSION["message"] = "CARD NOT FOUND";
+                //throw new Exception("CARD NOT FOUND.", 1);
             }
         } else {
-            throw new Exception("CARD NOT FOUND.", 1);
+            $_SESSION["message"] = "CARD NOT FOUND";
+
+            //throw new Exception("CARD NOT FOUND.", 1);
         }
 
         return Helper::view("CardCollection", [
