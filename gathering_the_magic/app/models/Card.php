@@ -137,7 +137,6 @@ class Card extends Model
     public static function searchCards($params)
     {
         return Card::search("cards", $params);
-        //return Card::readByName("cards","Chandra, Torch of defiance")
     }
 
     public static function fetchIdByName($name)

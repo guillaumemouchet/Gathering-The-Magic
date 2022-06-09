@@ -38,7 +38,7 @@ class CardController
                 if (CardController::controlText($_POST['cardName'])) {
                     $card->setName($_POST['cardName']);
                 } else {
-                    //ERREUR -> retour en arrière avec le même form
+                    //ERREUR -> retour en arrière
                     $_SESSION['message'] = "Incorrect input on the name";
 
                     return Helper::view("Card", ["colors" => $colors]);
@@ -49,7 +49,7 @@ class CardController
                 if (CardController::controlText($_POST['cardType'])) {
                     $card->setType($_POST['cardType']);
                 } else {
-                    //ERREUR -> retour en arrière avec le même form
+                    //ERREUR -> retour en arrière
                     $_SESSION['message'] = "Incorrect input on the type";
 
                     return Helper::view("Card", ["colors" => $colors]);
@@ -60,7 +60,7 @@ class CardController
                 if (CardController::controlText($_POST['extension'])) {
                     $card->setExtension($_POST['extension']);
                 } else {
-                    //ERREUR -> retour en arrière avec le même form
+                    //ERREUR -> retour en arrière
                     $_SESSION['message'] = "Incorrect input on the extension";
 
                     return Helper::view("Card", ["colors" => $colors]);
@@ -69,16 +69,15 @@ class CardController
 
 
                 //CMC
-                if (isset($_POST['cmc'])) {
-                    if (ctype_digit($_POST['cmc'])) {
-                        $card->setCost($_POST['cmc']);
-                    } else {
-                        $_SESSION['message'] = "Incorrect input on the CMC";
+                if (isset($_POST['cmc']) && ctype_digit($_POST['cmc'])) {
+                    $card->setCost($_POST['cmc']);
+                } else {
+                    $_SESSION['message'] = "Incorrect input on the CMC";
 
-                        return Helper::view("Card", ["colors" => $colors]);
-                        exit();
-                    }
+                    return Helper::view("Card", ["colors" => $colors]);
+                    exit();
                 }
+
 
                 //COLORS
 
@@ -100,9 +99,9 @@ class CardController
                 if (isset($_POST['colorless'])) {
                     $card->setColor($_POST['colorless']);
                 }
-                
+
                 //If user didn't select any color, the new card is assigned colorless
-                if(!(isset($_POST['white']) || isset($_POST['blue'])||isset($_POST['black'])||isset($_POST['red'])||isset($_POST['green'])||isset($_POST['colorless']))) //if any color are selected we need to go back
+                if (!(isset($_POST['white']) || isset($_POST['blue']) || isset($_POST['black']) || isset($_POST['red']) || isset($_POST['green']) || isset($_POST['colorless'])))
                 {
                     $card->setColor('colorless');
                 }
@@ -112,8 +111,7 @@ class CardController
                 } else {
                     $card->setDescription("");
                 }
-                try
-                {
+                try {
                     $card->save();
                     $id = Card::fetchIdByName($card->getName())['id'];
                     $card->setId($id);
@@ -123,20 +121,19 @@ class CardController
                     $_SESSION['message'] = "New card succesfully added to database";
 
                     $array = [$card];
-
+                    Helper::redirect('card?id=' . urlencode($id) . '');
                     return Helper::view("ShowCard", ["card" => $array]);
                     exit();
-                }
-                catch (Exception $e) 
-                {
+                } catch (Exception $e) {
                     $_SESSION['message'] = "Card already in database";
                     $colors = Card::fetchAllColor();
+                    Helper::redirect('card?id=' . urlencode($id) . '');
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
 
                 $array = [$card];
-                Helper::redirect("card?id=' . urlencode($id) . '");
+                Helper::redirect('card?id=' . urlencode($id) . '');
                 return Helper::view("ShowCard", ["card" => $array]);
                 exit();
             } else {

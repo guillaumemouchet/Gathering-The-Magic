@@ -21,21 +21,17 @@ class CollectionController
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //New condition needed when user is implemented
-            if (isset($_POST['card_id'])) {
+            if (isset($_POST['card_id']) && ctype_digit($_POST['card_id'])) {
                 $collection = new Collection;
                 $collection->setCardId($_POST['card_id']);
                 if (isset($_POST['possession'])) {
-                    if ($_POST['possession'] == "owned") {
-                        $collection->setOwned('true');
-                    } else {
-                        $collection->setOwned('false');
-                    }
+                    $collection->setOwned($_POST['possession'] == "owned" ? 'true' : 'false');
                 }
                 $collection->setUserId($_SESSION["User_id"]);
 
                 //Looking if card is already in collection
                 try {
-                    if (isset($_POST['quantity'])) {
+                    if (isset($_POST['quantity']) && ctype_digit($_POST['quantity'])) {
                         $collection->setQuantity($_POST['quantity']);
                     }
 
@@ -50,7 +46,7 @@ class CollectionController
                 catch (Exception $e) {
                     $qty = Collection::fetchQuantity($collection->getCardId(), $collection->getUserId(), $collection->getOwned());
                     $qty = $qty['quantity'] + $_POST['quantity'];
-                    if (isset($_POST['quantity'])) {
+                    if (isset($_POST['quantity']) && ctype_digit($_POST['quantity'])) {
                         $params = [
                             "binding" => [
                                 "quantity" => [$qty, PDO::PARAM_INT],
@@ -104,10 +100,11 @@ class CollectionController
                 $qty = $qty['quantity'] + $_POST['quantity'];
             }
             if ($qty <= 0) {
+                Helper::redirect("collection");
                 CollectionController::parseRemoveCard();
                 exit();
             }
-            if (isset($_POST['quantity'])) {
+            if (isset($_POST['quantity']) && ctype_digit($_POST['quantity'])) {
 
                 $params = [
                     "binding" => [
@@ -120,6 +117,7 @@ class CollectionController
                 Collection::updateQuantity($params);
                 $_SESSION['message'] = "Card quantity changed succesfully";
                 $collection = Collection::fetchAll($_SESSION["User_id"]);
+                Helper::redirect("collection");
                 return Helper::view("Collection", ["collection" => $collection]);
                 exit();
             }
@@ -139,10 +137,12 @@ class CollectionController
             Collection::remove($params);
             $_SESSION['message'] = "Card removed succesfully from collection";
             $collection = Collection::fetchAll($_SESSION["User_id"]);
+            Helper::redirect("collection");
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
         } else {
             $collection = Collection::fetchAll($_SESSION["User_id"]);
+            Helper::redirect("collection");
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
         }

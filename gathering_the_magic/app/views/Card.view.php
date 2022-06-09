@@ -29,7 +29,7 @@ Helper::checkLogin();
         if (sizeof($colors) > 0) {
             foreach ($colors as $color) {
         ?>
-                <label id="color"><input class="form-check-input" type="checkbox" id=<?= $color ?> name=<?= $color ?> value=<?= $color ?> /><?= $color ?></label>
+                <label id="color"><input class="form-check-input" type="checkbox" id=<?= htmlentities($color) ?> name=<?=  htmlentities($color) ?> value=<?= htmlentities($color) ?> /><?= htmlentities($color) ?></label>
 
         <?php
             }

@@ -1,11 +1,11 @@
 <?php
-$title = "Search result";
+$title = "Add cards to collection";
 require('partials/header.php');
 Helper::checkLogin();
 ?>
-<h1><?php echo $card[0]->getName(); ?></h1>
+<h1><?= htmlentities($card[0]->getName()); ?></h1>
 
-<?php echo $card[0]->asHTMLFlexBoxItem(); ?>
+<?= $card[0]->asHTMLFlexBoxItem(); ?>
 <hr>
 <form class="form_display" method="post" action="parse_add_card">
     <label>How many cards do you want to add (between 1 and 100) <input type="number" id="quantity" name="quantity" min="1" max="100" value="1"></label>

@@ -21,7 +21,7 @@ require('partials/header.php');
             if (sizeof($extensions) > 0) {
                 foreach ($extensions as $extension) {
             ?>
-                    <option value=<?= str_replace(' ', '_', $extension) ?>><?= $extension ?></option> <!-- getting rid of whitespaces for the name-->
+                    <option value=<?= htmlentities(str_replace(' ', '_', $extension)) ?>><?= htmlentities($extension) ?></option> <!-- getting rid of whitespaces for the name-->
             <?php
                 }
             } ?>
@@ -35,7 +35,7 @@ require('partials/header.php');
         if (sizeof($colors) > 0) {
             foreach ($colors as $color) {
         ?>
-                <label id="color"><input class="form-check-input" type="checkbox" id=<?= $color ?> name=<?= $color ?> value=<?= $color ?> /><?= $color ?></label>
+                <label id="color"><input class="form-check-input" type="checkbox" id=<?= htmlentities($color) ?> name=<?= htmlentities($color) ?> value=<?= htmlentities($color) ?> /><?= htmlentities($color) ?></label>
 
         <?php
             }
