@@ -2,13 +2,15 @@
 skinparam classAttributeIconSize 0
 abstract class "Model" {
     #id: int
-    +fetchOne()
-    +fetchAll()
+    #create()
+    #readAll()
+    +checkPercent()
+    #search()
+    #exists()
     +update()
-    +save()
     +delete()
+    +save()
     +searchId()
-    +getId(): int
     {abstract} +asHTMLTableRow()
 }
 class Deck{
@@ -24,30 +26,47 @@ class Collection{
     #quantity: int
     #card_id: int
     +asHTMLTableRow()
+    +contains()
+    +save()
+    +updateQuantity()
+    +remove()
+    +show()
 }
 class User{
-    -password: string
     +authentification()
-    +asHTMLTableRow()
 }
+class AboutController
+class AdvancedResearchController
+{
+    +parseSearchForm()
+    +show()
+    -check()
+    -checkColors()
+    -checkColor()
+}
+class CardController {
+    +parseNewCard()
+    +controlText()
+}
+
+class CollectionController{
+    +parseUpdateCard()
+    +parseAddCard()
+    +parseRemoveCard()
+    +show()
+
+}
+class DeckController
+class ExtensionController
+class IndexController
+class NewCardController
 
 class UserController {
     +login()
+    +logout()
 }
-class CollectionController{
-    +parseUpdate()
-    +show()
-
-}
-class DeckController{
-    +parseUpdate()
-    +show()
-}
-class IndexController
-class AboutController
-class API
 
 Model <|-- Collection
 Model <|-- User
-Model <|-- Deck
+Model <|-- Card
 

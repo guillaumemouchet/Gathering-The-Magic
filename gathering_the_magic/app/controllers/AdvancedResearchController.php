@@ -10,7 +10,7 @@ class AdvancedResearchController
     }
 
 
-    public static function checkColors(&$searchStmt, &$searchBinding, &$first)
+    private static function checkColors(&$searchStmt, &$searchBinding, &$first)
     {
         $searchStmtColor = '';
         $firstColor = true;
@@ -53,7 +53,7 @@ class AdvancedResearchController
             $searchStmt .= ' ) ';
         }
     }
-    public static function checkColor($name, $id, &$searchStmtColor, &$firstColor)
+    private static function checkColor($name, $id, &$searchStmtColor, &$firstColor)
     {
         if (isset($_GET["{$name}"])) {
             if (!$firstColor) {
@@ -64,7 +64,7 @@ class AdvancedResearchController
         }
     }
 
-    public static function check($name, $search, $param, &$searchStmt, &$searchBinding, &$first)
+    private static function check($name, $search, $param, &$searchStmt, &$searchBinding, &$first)
     {
         if (isset($_GET["{$name}"])) {
             //Method in model
@@ -88,10 +88,6 @@ class AdvancedResearchController
     }
 
 
-    /**
-     * Method will change with API integration
-     * For the moment allows only name search for demo
-     */
     public function parseSearchForm()
     {
         $searchBinding = [];

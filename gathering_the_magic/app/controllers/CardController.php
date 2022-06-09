@@ -39,9 +39,8 @@ class CardController
                     $card->setName($_POST['cardName']);
                 } else {
                     //ERREUR -> retour en arrière avec le même form
-                    echo '<script language="javascript">';
-                    echo 'alert("Incorrect Input");';
-                    echo '</script>';
+                    $_SESSION['message'] = "Incorrect input on the name";
+
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
@@ -51,9 +50,8 @@ class CardController
                     $card->setType($_POST['cardType']);
                 } else {
                     //ERREUR -> retour en arrière avec le même form
-                    echo '<script language="javascript">';
-                    echo 'alert("Incorrect Input");';
-                    echo '</script>';
+                    $_SESSION['message'] = "Incorrect input on the type";
+
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
@@ -63,9 +61,8 @@ class CardController
                     $card->setExtension($_POST['extension']);
                 } else {
                     //ERREUR -> retour en arrière avec le même form
-                    echo '<script language="javascript">';
-                    echo 'alert("Incorrect Input");';
-                    echo '</script>';
+                    $_SESSION['message'] = "Incorrect input on the extension";
+
                     return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
@@ -76,9 +73,8 @@ class CardController
                     if (ctype_digit($_POST['cmc'])) {
                         $card->setCost($_POST['cmc']);
                     } else {
-                        echo '<script language="javascript">';
-                        echo 'alert("Incorrect Input");';
-                        echo '</script>';
+                        $_SESSION['message'] = "Incorrect input on the CMC";
+
                         return Helper::view("Card", ["colors" => $colors]);
                         exit();
                     }
