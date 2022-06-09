@@ -175,7 +175,7 @@ class Collection extends Model
             $card = Card::fetchId($_GET["id"]);
 
             if ($card == null) {
-                // raising an exception maybe not the best solution
+                
                 $_SESSION["message"] = "CARD NOT FOUND";
                 //throw new Exception("CARD NOT FOUND.", 1);
             }

@@ -24,7 +24,7 @@
                 <div class="col-16">
 
                         <nav>
-                                <a id="nav-text"><?= isset($_SESSION['Username']) ? $_SESSION['Username'] : "No one is logged in" ?></a>
+                                <a id="nav-text"><?= isset($_SESSION['Username']) ? htmlentities($_SESSION['Username']) : "No one is logged in" ?></a>
                                 <a id="nav-text" href="home">Home</a>
                                 <a id="nav-text" href="advanced_research">Advanced Research</a>
                                 <a id="nav-text" href="collection">Collection</a>

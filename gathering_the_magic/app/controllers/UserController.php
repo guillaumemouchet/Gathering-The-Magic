@@ -17,9 +17,12 @@ class UserController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST)) {
                 if (User::authentification($_POST["user_input"], $_POST["password_input"])) {
+                    Helper::redirect('home');
                     return Helper::view("index");
                 } else {
                     $_SESSION['message'] = "Wrong username or password";
+                    Helper::redirect('login');
+
                     return Helper::view("login");
                 }
             }
@@ -33,6 +36,8 @@ class UserController
 
                 unset($_SESSION["User_id"]);
                 unset($_SESSION["Username"]);
+                Helper::redirect('home');
+
                 return Helper::view("index");
 
             }
