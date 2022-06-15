@@ -107,7 +107,6 @@ class CollectionController
             }
         }
     }
-
     public static function parseRemoveCard()
     {
         if($_SERVER['REQUEST_METHOD'] === 'POST')
