@@ -47,7 +47,6 @@ La découverte de Boostrap (https://getbootstrap.com) à permis une grande facil
 
 AJAX est l'acronyme pour Ascynchronous JavaScript + XML qui défini une approche de programmation liant un ensemble de technologie dont HTML, CSS, JavaScript, DOM, XML, mais principalement l'objet XMLHttpRequest. Cette technologie permet de mettre à jour l'interface utilisateur rapide dans avoir à recharger la page entièrement.
 La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
-[EXPLICATION DE CE QU'ON A FAIT EXACTEMENT EN AJAX]
 
 ## Maj après le rendu intermédiaire (27.04.22)
 
@@ -58,7 +57,7 @@ Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le p
 ## Nouveaux objectifs priorisés
 
 | numéro | description |
-
+|--|--|
 | 1 | Retravailler la BDD pour pour transformer les test_cards en, cards|
 | 2 | Ajout de nouvelles cartes par l'utilisateur  |
 | 3 | Retravailler la recherche avancée |
@@ -72,7 +71,7 @@ Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le p
 ## Nouveaux objectifs priorisés
 
 | numéro | description |
-
+|--|--|
 | 1 | Retravailler la BDD pour pour transformer les test_cards en, cards|
 | 2 | Ajout de nouvelles cartes par l'utilisateur  |
 | 3 | Retravailler la recherche avancée |
@@ -84,7 +83,7 @@ Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le p
 ## Anciens objectifs généraux priorisés
 
 | numéro | description |
-
+|--|--|
 | 1 | Visualiser un Classeur rempli manuellement|
 | 2 | Effectuer des opérations CRUD à une carte dans la collection  |
 | 3 | Integration de l'API (Visualisation des cartes -> recherche avancée) |
@@ -97,23 +96,5 @@ Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le p
 NB: Si l'intégration de l'API est trop fastidieuse, il sera toujours possible de travailler avec des données en dur. 
 
 (numéro plus haut = plus basse priorité) |
-| 5 | Mise en page CSS |
-| 6 | Intégration des utilisateurs |
-| 7 | Gestion de decks |
 
-## Anciens objectifs généraux priorisés
 
-| numéro | description |
-
-| 1 | Visualiser un Classeur rempli manuellement|
-| 2 | Effectuer des opérations CRUD à une carte dans la collection  |
-| 3 | Integration de l'API (Visualisation des cartes -> recherche avancée) |
-| 4 | Visualiser chaque extension |
-| 5 | Remplir les extensions en fonction de la Collection |
-| 6 | s'inscrire |
-| 7 | Création de collection diverse (Liste) |
-| 8 | Création de decks |
-
-NB: Si l'intégration de l'API est trop fastidieuse, il sera toujours possible de travailler avec des données en dur. 
-
-(numéro plus haut = plus basse priorité)
