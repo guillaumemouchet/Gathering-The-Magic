@@ -49,7 +49,6 @@ AJAX est l'acronyme pour Ascynchronous JavaScript + XML qui défini une approche
 La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
 
 
-EXPLICATION AJAX DE CE QU'ON A FAIT NOUS??
 
 ## Maj après le rendu intermédiaire (27.04.22)
 
