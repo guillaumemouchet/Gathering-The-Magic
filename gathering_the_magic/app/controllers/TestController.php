@@ -1,10 +1,8 @@
 <?php
 
-use UserController as GlobalUserController;
-
 require_once "app/models/unit_test.php";
 require_once "UserController.php";
-class UserController
+class TestController
 {
     public function index()
     {
