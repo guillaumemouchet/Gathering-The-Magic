@@ -25,7 +25,7 @@ La majorité des objectifs fixés après le rendu intermédiaire, il reste néan
 
 ### Deck
 
-Les decks sont un moyen de trier les cartes sous forme de liste, elle permettrait par exemple à un utilisateur de créer un dock selon ces envies puis après un bouton de vérification que l'application s'occupe de vérifier qu'elle carte l'utilisateur possède dans sa collection et qu'elle carte il faudrait ajouter comme wishlist.
+Les decks sont un moyen de trier les cartes sous forme de liste, elle permettrait par exemple à un utilisateur de créer un deck selon ses envies puis après un bouton de vérification que l'application s'occupe de vérifier qu'elle carte l'utilisateur possède dans sa collection et qu'elle carte il faudrait ajouter comme wishlist.
 
 Il y aurait donc la possibilité de créer des decks avec des noms, puis d'y ajouter des cartes selon celle existante dans la base de données.
 
@@ -47,6 +47,8 @@ La découverte de Boostrap (https://getbootstrap.com) à permis une grande facil
 
 AJAX est l'acronyme pour Ascynchronous JavaScript + XML qui défini une approche de programmation liant un ensemble de technologie dont HTML, CSS, JavaScript, DOM, XML, mais principalement l'objet XMLHttpRequest. Cette technologie permet de mettre à jour l'interface utilisateur rapide dans avoir à recharger la page entièrement.
 La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
+
+EXPLICATION AJAX DE CE QU'ON A FAIT NOUS??
 
 ## Maj après le rendu intermédiaire (27.04.22)
 
