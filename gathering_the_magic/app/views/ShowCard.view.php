@@ -18,7 +18,7 @@ Helper::checkLogin();
             <label>Wishlist: <input type="radio" id="wishlist" name="possession" value="wishlist"></label>
         </div>
     </div>
-    <input type="hidden" id="card_id" name="card_id" value="<?php echo $card[0]->getId(); ?>">
+    <input type="hidden" id="card_id" name="card_id" value="<?= $card[0]->getId(); ?>">
 
     <label id="btnSubmit"><input type="submit" name="add" value="Add to Collection !" /></label>
 

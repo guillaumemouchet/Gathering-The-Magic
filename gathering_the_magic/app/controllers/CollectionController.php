@@ -86,7 +86,16 @@ class CollectionController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $qty = Collection::fetchQuantity($_POST['card_id'], $_SESSION["User_id"], $_POST['owned']);
+            $owned = $_POST['owned'];
+            /*
+            if (isset($_POST['possession'])) {
+                if ($_POST['possession'] == "owned") {
+                    $owned = true;
+                } else {
+                    $owned=false;
+                }
+            }*/
+            $qty = Collection::fetchQuantity($_POST['card_id'], $_SESSION["User_id"],  $owned);
 
 
             if (isset($_POST['reduce'])) {
@@ -105,7 +114,7 @@ class CollectionController
                         "quantity" => [$qty, PDO::PARAM_INT],
                         "card_id" => [$_POST['card_id'], PDO::PARAM_INT],
                         "user_id" => [$_SESSION["User_id"], PDO::PARAM_INT],
-                        "owned" => [$_POST['owned'], PDO::PARAM_STR]
+                        "owned" => [ $owned, PDO::PARAM_STR]
                     ]
                 ];
                 Collection::updateQuantity($params);
