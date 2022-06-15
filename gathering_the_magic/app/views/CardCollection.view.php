@@ -2,7 +2,7 @@
     $title = "Search result";
     require('partials/header.php')
 ?>
-<h1><?php echo $card[0]->getName(); ?></h1>
+<h1><?php echo $card[0]->getName();?></h1>
 
 
 <?php echo $card[0]->asHTMLFlexBoxItem();?>

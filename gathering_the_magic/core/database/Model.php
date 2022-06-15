@@ -94,6 +94,17 @@ abstract class Model
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
+    protected static function getIdByName($table, $name)
+    {
+        $dbh = App::get('dbh');
+        echo "reading".$name;
+        $statement = $dbh->prepare("SELECT id FROM {$table} WHERE name = :model_name;");
+        $statement->bindParam(':model_name', $name);
+        $statement->execute();
+
+        return $statement->fetch(PDO::FETCH_ASSOC);
+    }
+
     /**
      * @return 1 if % symbol is found in user input
      */

@@ -109,6 +109,7 @@ class Collection extends Model
 
     public function save()
     {
+        
         $values_collection_user = [
             "user_id" => 1, //In the future will have to change to $_SESSION
             "card_id" => $this->card_id,
