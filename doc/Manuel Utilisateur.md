@@ -17,7 +17,7 @@ La page home n'a pas de grande fonctionnalité autre que vous présenter briève
 
 Sur cette page vous pourrez comme bon vous semble faire des recherches sur les cartes existantes dans la base de données, tous les champs ne sont pas obligatoires, mais plus vous en remplissez plus la recherche sera précise.<br>
 Les critères sont considérés comme des AND, donc si vous rechercher dans le nom "Chandra" et dans la couleur "Red", vous trouverez toutes les cartes contenant dans le nom "Chandra" qui sont de couleur rouge, et non toutes les cartes rouges et toutes les cartes contenant dans le nom "Chandra".<br>
-Pour ce qui est des couleurs entre elles, elles fonctionnent plus comme un ou, donc si vous chercher du "Red" et du "Black", vous trouverez toutes les cartes qui contiennent soit du rouge ou du noir dans leur identité de couleur.<br>
+Pour ce qui est des couleurs entre elles, elles fonctionnent plus comme un OR, donc si vous chercher du "Red" et du "Black", vous trouverez toutes les cartes qui contiennent soit du rouge ou du noir dans leur identité de couleur.<br>
 Les extensions sont celles reprises directement de la base de données donc vous pouvez vous en aider pour faire une recherche précise sans devoir vous rappeler exactement de l'orthographe.<br>
 
 Une fois tous vos critères sélectionnés vous pourrez visionner toutes les cartes correspondantes à ces critères. Une fois une carte intéressante trouvée il vous suffit de cliquer dessus afin de pouvoir l'ajouter à votre collection. Vous aurez le choix de la quantité, mais aussi de noté si c'est une carte que vous possédez ou alors une carte que vous aimeriez avoir.<br>
@@ -25,7 +25,7 @@ Une fois tous vos critères sélectionnés vous pourrez visionner toutes les car
 ## Collection
 
 Une fois que vous avez ajouté une carte à votre collection vous y serez directement amené, vous pourrez donc voir toutes les cartes que vous possédez avec leurs noms, leurs quantités, et si vous souhaitez les avoirs ou les possédez déjà.<br>
-Si vous voulez effectuer des modifications sur une carte de votre collection il vous suffit de cliquer sur son nom. Vous pourrez donc décider de plusieurs actions, l'enlevez complètement de votre collection, ou alors augmenter ou réduire sa quantité à l'aide des boutons et de l'input number à votre disposition.<br>
+Si vous voulez effectuer des modifications sur une carte de votre collection il vous suffit de cliquer sur son nom. Vous pourrez donc décider de plusieurs actions, l'enlever complètement de votre collection, ou alors augmenter ou réduire sa quantité à l'aide des boutons et de l'input number à votre disposition.<br>
 
 ## Extensions
 
