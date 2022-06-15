@@ -40,8 +40,9 @@ INSERT INTO `cards` (`id`, `name`, `cost`, `type`, `description`, `extension`, `
 (31,	'Lurrus of the DreamRender',	3,	'Legendary Creature Hound',	'Companion',	'Ikoria Behemot Lair',	'2022-06-06 10:30:14'),
 (33,	'Urza\'s Saga',	0,	'Legendary Land - Saga',	'Saga Strange Stuff',	'Modern Horizon 2',	'2022-06-06 10:46:04'),
 (34,	'Magda, Brazen Outlaws',	2,	'Legendary Creature - Dwarf',	'Whenever a drawf taps create a treasure token.',	'Kaldheim',	'2022-06-06 10:47:40'),
-(35,	'Breakneck Berserker',	3,	'Creature _dwarf Berserker',	'Haste',	'Kaldheim',	'2022-06-06 20:17:39'),
-(44,	'Burning-Tree Emissary ',	2,	'Creature - Human Shaman ',	'Add red and green when it enters your battlefied',	'Dungeon and Dragon ',	'2022-06-08 17:59:59');
+(35,	'Breakneck Berserker',	3,	'Creature - Dwarf Berserker',	'Haste',	'Kaldheim',	'2022-06-15 06:21:15'),
+(44,	'Burning-Tree Emissary ',	2,	'Creature - Human Shaman ',	'Add red and green when it enters your battlefied',	'Dungeon and Dragon ',	'2022-06-08 17:59:59'),
+(45,	'Thrill of Probability',	2,	'Instant',	'En tant que coÃ»t supplÃ©mentaire dÃ©fausser vous d\'une carte. Piocher deux cartes.',	'Theros - Beyond Death',	'2022-06-08 18:52:27');
 
 DROP TABLE IF EXISTS `cards_color`;
 CREATE TABLE `cards_color` (
@@ -54,6 +55,39 @@ CREATE TABLE `cards_color` (
   CONSTRAINT `cards_color_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `cards` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `cards_color` (`card_id`, `color_id`) VALUES
+(1,	4),
+(2,	2),
+(2,	3),
+(3,	1),
+(3,	5),
+(4,	6),
+(5,	5),
+(6,	1),
+(7,	5),
+(8,	1),
+(9,	3),
+(9,	4),
+(10,	5),
+(11,	3),
+(12,	2),
+(15,	1),
+(15,	2),
+(16,	2),
+(16,	4),
+(26,	1),
+(27,	1),
+(28,	1),
+(29,	3),
+(30,	6),
+(31,	1),
+(31,	3),
+(33,	6),
+(34,	4),
+(35,	4),
+(44,	4),
+(44,	5),
+(45,	4);
 
 DROP TABLE IF EXISTS `color`;
 CREATE TABLE `color` (
@@ -62,6 +96,13 @@ CREATE TABLE `color` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `color` (`id`, `name`) VALUES
+(1,	'white'),
+(2,	'blue'),
+(3,	'black'),
+(4,	'red'),
+(5,	'green'),
+(6,	'colorless');
 
 DROP TABLE IF EXISTS `decks`;
 CREATE TABLE `decks` (
@@ -79,6 +120,9 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `user` (`id`, `password`, `username`) VALUES
+(1,	'd74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1',	'toto'),
+(2,	'71ea4dee4c387f40197e36666c87e07890650161455f2932a40fbeec47673cd7',	'aka');
 
 DROP TABLE IF EXISTS `user_cards`;
 CREATE TABLE `user_cards` (
@@ -93,6 +137,21 @@ CREATE TABLE `user_cards` (
   CONSTRAINT `user_cards_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `cards` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT INTO `user_cards` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
+(1,	1,	3,	'true'),
+(1,	5,	2,	'true'),
+(1,	6,	1,	'true'),
+(1,	26,	1,	'true'),
+(1,	27,	3,	'true'),
+(2,	1,	5,	'true'),
+(2,	3,	9,	'true'),
+(2,	4,	2,	'true'),
+(2,	5,	3,	'true'),
+(2,	6,	1,	'true'),
+(2,	27,	4,	'true'),
+(2,	29,	1,	'true'),
+(2,	30,	1,	'true'),
+(2,	45,	5,	'false');
 
 INSERT INTO `user_cards` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
 (1,	3,	3,	'false'),
