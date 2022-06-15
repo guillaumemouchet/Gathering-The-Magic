@@ -5,7 +5,7 @@
                         if (isset($_SESSION['message'])) {
                         ?>
 
-                                <p id="Test" class="text-danger"><?= $_SESSION['message'] ?></p>
+                                <p id="Test" class="text-danger"><?= htmlentities($_SESSION['message']) ?></p>
                                 <script>
                                         var timeout;
                                         var elem = document.getElementById("Test");
