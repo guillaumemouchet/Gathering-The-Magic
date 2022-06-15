@@ -57,7 +57,7 @@ class Collection extends Model
     }
 
     /***********************
-        Public Methods
+            Setters
     ***********************/
     public static function fetchById($id)
     {
@@ -102,6 +102,10 @@ class Collection extends Model
         $statement->execute();
         return $statement->fetchColumn();
     }
+
+    /***********************
+        Public Methods
+    ***********************/
 
     public function save()
     {
@@ -187,6 +191,5 @@ class Collection extends Model
                 'card' => $card,
             ]);
     }
-    
     
 }
