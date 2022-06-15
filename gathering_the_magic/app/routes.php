@@ -20,5 +20,6 @@ $router->define([
   'new_card' => 'CardController',
   'parse_new_card' => 'CardController@parseNewCard',
   'new_cards' => 'NewCardsController',
-  'about' => 'AboutController'
+  'about' => 'AboutController',
+  'test' => 'TestController'
 ]);
