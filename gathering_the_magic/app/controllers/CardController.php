@@ -30,6 +30,7 @@ class CardController
     public function parseNewCard()
     {
         $card = new Card();
+        $colors = Card::fetchAllColor();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (count($_POST) > 0) {
 
@@ -39,7 +40,7 @@ class CardController
                 } else {
                     //ERREUR -> retour en arrière avec le même form
                     echo "Incorrect input";
-                    return Helper::view("card");
+                    return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
 
@@ -49,7 +50,7 @@ class CardController
                 } else {
                     //ERREUR -> retour en arrière avec le même form
                     echo "Incorrect input";
-                    return Helper::view("card");
+                    return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
 
@@ -59,7 +60,7 @@ class CardController
                 } else {
                     //ERREUR -> retour en arrière avec le même form
                     echo "Incorrect input";
-                    return Helper::view("card");
+                    return Helper::view("Card", ["colors" => $colors]);
                     exit();
                 }
 
@@ -68,6 +69,10 @@ class CardController
                 if (isset($_POST['cmc'])) {
                     if (ctype_digit($_POST['cmc'])) {
                         $card->setCost($_POST['cmc']);
+                    }else
+                    {
+                        return Helper::view("Card", ["colors" => $colors]);
+                        exit(); 
                     }
                 }
 
@@ -88,9 +93,21 @@ class CardController
                 if (isset($_POST['green'])) {
                     $card->setColor($_POST['green']);
                 }
+                if (isset($_POST['colorless'])) {
+                    $card->setColor($_POST['colorless']);
+                }
 
-                if ($this->controlText($_POST['description'])) {
+                if(!(isset($_POST['white']) || isset($_POST['blue'])||isset($_POST['black'])||isset($_POST['red'])||isset($_POST['green'])||isset($_POST['colorless']))) //if any color are selected we need to go back
+                {
+                    return Helper::view("Card", ["colors" => $colors]);
+                    exit(); 
+                }
+
+                if (CardController::controlText($_POST['description'])) { // A card can have no description
                     $card->setDescription($_POST['description']);
+                }else
+                {
+                    $card->setDescription("");
                 }
 
                 $card->save();
