@@ -12,46 +12,17 @@ class Card extends Model
     ***********************/
     private $id;	//int(11)
     private $name;	//varchar(64)	
-    private $color;
     private $cost;	//int(11)	
     private $type;	//varchar(32)	
     private $description;	//varchar(200)	
     private $extension;	//varchar(64)
+    private $color = array();
 
-
-    /***********************
-            Getters
-     ***********************/
-    public function getId()
+    public function setColor($c)
     {
-        return $this->id;
-    }
-    public function getName()
-    {
-        return $this->name;
-    }
-    public function getColor()
-    {
-        return $this->color;
-    }
-    public function getCost()
-    {
-        return $this->cost;
-    }
-    public function getType()
-    {
-        return $this->type;
-    }
-    public function getDescription()
-    {
-        return $this->description;
-    }
-    public function getExtension()
-    {
-        return $this->extension;
+        array_push($this->color, $c);
     }
 
-    
     /***********************
         Public Methods
     ***********************/

@@ -19,5 +19,8 @@
 			?><p>No cards in collection yet :(</p><?php
 		}
 		?>
+		<form method="post" action="new_card">
+    		<input type="submit" name="add" value="Add new Card!"/>
+		</form>
 
 <?php require('partials/footer.php') ?>

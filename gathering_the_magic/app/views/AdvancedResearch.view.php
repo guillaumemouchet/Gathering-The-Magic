@@ -6,15 +6,9 @@
 <h1>Advanced research</h1>
 
 <form method="get" action="parse_search_form">
-    <label>Card name: <input type="text" id="cardName" name="cardName"/></label>
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+    <label>Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+"/></label>
     <!-- The rest of the form is disabled for the moment since we want to work with the API for the research later on -->
-=======
->>>>>>> 2c5b775 (Implemented research on Test Cards)
-=======
-    <!-- The rest of the form is disabled for the moment since we want to work with the API for the research later on -->
->>>>>>> 85db0da (Issue 19: Cards are now added to existing collection)
     <label>Card type: <input type="text" id="cardType" name="cardType" disabled/></label>
 
     <label for="extension">Extension: </label>
