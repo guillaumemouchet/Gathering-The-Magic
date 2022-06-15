@@ -46,7 +46,7 @@ La découverte de Boostrap (https://getbootstrap.com) à permis une grande facil
 ### Détail technique d’AJAX
 
 AJAX est l'acronyme pour Ascynchronous JavaScript + XML qui défini une approche de programmation liant un ensemble de technologie dont HTML, CSS, JavaScript, DOM, XML, mais principalement l'objet XMLHttpRequest. Cette technologie permet de mettre à jour l'interface utilisateur rapide dans avoir à recharger la page entièrement.
-La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
+La mise en place de notre [ajax](https://gitlab-etu.ing.he-arc.ch/benjamin.mouchet/awa-g1-gatheringthemagic/-/wikis/Ajax) permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée. 
 
 
 
