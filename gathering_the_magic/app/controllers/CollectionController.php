@@ -5,52 +5,42 @@ class CollectionController
 {
     public function index()
     {
-        $collection = Collection::fetchAll(1);
+        $collection = Collection::fetchAll($_SESSION["User_id"]);
         return Helper::view("Collection", ["collection" => $collection]);
     }
 
     public function parseAddCard()
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             //New condition needed when user is implemented
-            if(isset($_POST['card_id']))
-            {
+            if (isset($_POST['card_id'])) {
                 $collection = new Collection;
                 $collection->setCardId($_POST['card_id']);
-                if(isset($_POST['possession']))
-                {
-                    if($_POST['possession'] == "owned")
-                    {
+                if (isset($_POST['possession'])) {
+                    if ($_POST['possession'] == "owned") {
                         $collection->setOwned('true');
-                    }                    
-                    else
-                    {
+                    } else {
                         $collection->setOwned('false');
                     }
                 }
-                $collection->setUserId(1);
+                $collection->setUserId($_SESSION["User_id"]);
 
                 //Looking if card is already in collection
-                try
-                {
-                    if(isset($_POST['quantity']))
-                    {
+                try {
+                    if (isset($_POST['quantity'])) {
                         $collection->setQuantity($_POST['quantity']);
                     }
-                    
+
                     $collection->save();
-                    $collection = Collection::fetchAll(1);
+                    $collection = Collection::fetchAll($_SESSION["User_id"]);
                     return Helper::view("Collection", ["collection" => $collection]);
                     exit();
                 }
                 //Otherwise updates the cards quantity
-                catch(Exception $e)
-                {
+                catch (Exception $e) {
                     $qty = Collection::fetchQuantity($collection->getCardId(), $collection->getUserId(), $collection->getOwned());
                     $qty = $qty['quantity'] + $_POST['quantity'];
-                    if(isset($_POST['quantity']))
-                    {
+                    if (isset($_POST['quantity'])) {
                         $params = [
                             "binding" => [
                                 "quantity" => [$qty, PDO::PARAM_INT],
@@ -60,15 +50,13 @@ class CollectionController
                             ]
                         ];
                         Collection::updateQuantity($params);
-                        $collection = Collection::fetchAll(1);
+                        $collection = Collection::fetchAll($_SESSION["User_id"]);
                         return Helper::view("Collection", ["collection" => $collection]);
                         exit();
                     }
                 }
-            }
-            else
-            {
-                $collection = Collection::fetchAll(1);
+            } else {
+                $collection = Collection::fetchAll($_SESSION["User_id"]);
                 return Helper::view("Collection", ["collection" => $collection]);
                 exit();
             }
@@ -80,28 +68,33 @@ class CollectionController
      */
     public static function parseUpdateCard()
     {
-        
-        if($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
-            $qty = Collection::fetchQuantity($_POST['card_id'], $_POST['user_id'], $_POST['owned']);
-            $qty = $qty['quantity'] + $_POST['quantity'];
-            if($qty <= 0)
-            {
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            $qty = Collection::fetchQuantity($_POST['card_id'], $_SESSION["User_id"], $_POST['owned']);
+            
+
+            if (isset($_POST['reduce'])) {
+                $qty = $qty['quantity'] - $_POST['quantity'];
+            } else {
+                $qty = $qty['quantity'] + $_POST['quantity'];
+            }
+            if ($qty <= 0) {
                 CollectionController::parseRemoveCard();
                 exit();
             }
-            if(isset($_POST['quantity']))
-            {
+            if (isset($_POST['quantity'])) {
+
                 $params = [
                     "binding" => [
                         "quantity" => [$qty, PDO::PARAM_INT],
                         "card_id" => [$_POST['card_id'], PDO::PARAM_INT],
-                        "user_id" => [$_POST['user_id'], PDO::PARAM_INT],
+                        "user_id" => [$_SESSION["User_id"], PDO::PARAM_INT],
                         "owned" => [$_POST['owned'], PDO::PARAM_STR]
                     ]
                 ];
                 Collection::updateQuantity($params);
-                $collection = Collection::fetchAll(1);
+                $collection = Collection::fetchAll($_SESSION["User_id"]);
                 return Helper::view("Collection", ["collection" => $collection]);
                 exit();
             }
@@ -110,49 +103,41 @@ class CollectionController
 
     public static function parseRemoveCard()
     {
-        if($_SERVER['REQUEST_METHOD'] === 'POST')
-        {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $params = [
                 "binding" => [
                     "card_id" => [$_POST['card_id'], PDO::PARAM_INT],
-                    "user_id" => [$_POST['user_id'], PDO::PARAM_INT],
+                    "user_id" => [$_SESSION["User_id"], PDO::PARAM_INT],
                     "owned" => [$_POST['owned'], PDO::PARAM_STR]
                 ]
             ];
             Collection::remove($params);
-            
-            $collection = Collection::fetchAll(1);
+
+            $collection = Collection::fetchAll($_SESSION["User_id"]);
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
-        }
-        else
-        {
-            $collection = Collection::fetchAll(1);
+        } else {
+            $collection = Collection::fetchAll($_SESSION["User_id"]);
             return Helper::view("Collection", ["collection" => $collection]);
             exit();
         }
     }
-    
+
     public function show()
     {
-        if(isset($_GET["id"]) && ctype_digit($_GET["id"]))
-        {
-            
+        if (isset($_GET["id"]) && ctype_digit($_GET["id"])) {
+
             $card = Card::fetchId($_GET["id"]);
-            if($card == null)
-            {
+            if ($card == null) {
                 // raising an exception maybe not the best solution
                 throw new Exception("CARD NOT FOUND.", 1);
             }
-        }
-        else {
+        } else {
             throw new Exception("CARD NOT FOUND.", 1);
         }
 
-        return Helper::view("CardCollection",[
-                'card' => $card,
-            ]);
+        return Helper::view("CardCollection", [
+            'card' => $card,
+        ]);
     }
-
-    
 }

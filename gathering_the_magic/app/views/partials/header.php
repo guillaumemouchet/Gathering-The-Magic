@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
-	<title><?= htmlentities($title) ?></title>
+    <title><?= htmlentities($title) ?></title>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
 
 

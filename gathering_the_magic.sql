@@ -134,8 +134,3 @@ CREATE TABLE `user_deck` (
   CONSTRAINT `user_deck_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `cards` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-<<<<<<< HEAD
-=======
-
--- 2022-06-05 09:39:03
->>>>>>> 9083685 (Fixed sql dump)

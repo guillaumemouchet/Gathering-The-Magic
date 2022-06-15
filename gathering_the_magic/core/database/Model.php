@@ -98,7 +98,7 @@ abstract class Model
     protected static function getIdByName($table, $name)
     {
         $dbh = App::get('dbh');
-        echo "reading".$name;
+        echo "reading" . $name;
         $statement = $dbh->prepare("SELECT id FROM {$table} WHERE name = :model_name;");
         $statement->bindParam(':model_name', $name);
         $statement->execute();
@@ -124,22 +124,23 @@ abstract class Model
                 $request = $request . ' ' . $value;
             }
         }
-        $request = $request.";";
+        $request = $request . ";";
+        echo $request;
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
             $arrayTemp = array();
             $i = 0;
             foreach ($params["binding"] as $key => $value) {
 
-                if(preg_match("/id./",$key) == 1)
-                {
-                    array_push($arrayTemp,"{$value[0]}");//Since bindParam need a reference, we need to use an array
+                if (preg_match("/id./", $key) == 1) { //For some reseach we have to check multiple ids
+                    array_push($arrayTemp, "{$value[0]}"); //Since bindParam need a reference, we need to use an array
 
-                }else{
-                    array_push($arrayTemp,"%{$value[0]}%");//Since bindParam need a reference, we need to use an array
+                } else {
+                    array_push($arrayTemp, "%{$value[0]}%"); //Since bindParam need a reference, we need to use an array
 
                 }
-                $statement->bindParam(':'.$key, $arrayTemp[$i++] , $value[1]);
+                echo $value[0];
+                $statement->bindParam(':' . $key, $arrayTemp[$i++], $value[1]);
             }
         }
 
@@ -148,7 +149,7 @@ abstract class Model
     }
 
 
-    
+
     protected static function exists($table, $params)
     {
         $dbh = App::get('dbh');
@@ -158,12 +159,14 @@ abstract class Model
                 $request = $request . " " . $value;
             }
         }
-        $request = $request.";";
+        $request = $request . ";";
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
+            $arrayTemp = array();
+            $i = 0;
             foreach ($params["binding"] as $key => $value) {
-                $test = "{$value[0]}";
-                $statement->bindParam(":".$key, $test, $value[1]);
+                array_push($arrayTemp, "{$value[0]}"); //Since bindParam need a reference, we need to use an array
+                $statement->bindParam(':' . $key, $arrayTemp[$i++], $value[1]);
             }
         }
         $statement->execute();
@@ -213,5 +216,34 @@ abstract class Model
         $statement->execute();
     }
 
-    
+    public static function searchId($table, $params)
+    {
+        $request = "SELECT id FROM {$table} WHERE";
+        $dbh = App::get('dbh');
+        foreach ($params as $key => $value) {
+            if ($key != "binding") {
+                $request = $request . " " . $value;
+            }
+        }
+        $request = $request . ";";
+        echo $request;
+        $statement = $dbh->prepare($request);
+
+        if (isset($params["binding"])) {
+            $arrayTemp = array();
+            $i = 0;
+            foreach ($params["binding"] as $key => $value) {
+                array_push($arrayTemp, "{$value[0]}"); //Since bindParam need a reference, we need to use an array
+                $statement->bindParam(':' . $key, $arrayTemp[$i++], $value[1]);
+            }
+        }
+
+        $statement->execute();
+
+        if ($statement->rowCount() == 1) {
+            return $statement->fetch()["id"];
+        } else {
+            return -1;
+        }
+    }
 }

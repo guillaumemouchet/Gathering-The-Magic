@@ -4,7 +4,8 @@ class NewCardsController
 {
     public function index()
     {
-        $cards = Card::fetchByDate(time());
+        $_SESSION["last_timestamp"] = time(); //TODO
+        $cards = Card::fetchByDate($_SESSION["last_timestamp"]);
         return Helper::view("NewCards", ["cards" => $cards]);
     }
 }

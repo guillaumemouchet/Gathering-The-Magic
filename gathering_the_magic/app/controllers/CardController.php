@@ -5,61 +5,48 @@ class CardController
 {
     public function index()
     {
-        return Helper::view("Card");
+        $colors = Card::fetchAllColor();
+        return Helper::view("Card", ["colors" => $colors]);
         exit();
     }
-    
+
     public static function controlText($name)
     {
-        if(isset($name))
-        {
-            if(!ctype_space($name) && !empty($name))
-            {
-                if(Card::checkPercent($name))
-                {
+        if (isset($name)) {
+            if (!ctype_space($name) && !empty($name)) {
+                if (Card::checkPercent($name)) {
                     return false;
                 }
                 return true;
-            }
-            else
-            {
+            } else {
                 return false;
-            } 
-        }
-        else 
-        {
+            }
+        } else {
             return false;
         }
     }
 
+
     public function parseNewCard()
     {
         $card = new Card();
-        if($_SERVER['REQUEST_METHOD']==='POST')
-        {
-           if(count($_POST) > 0)
-           {
-               
-               //CARDNAME
-               if(CardController::controlText($_POST['cardName']))
-               {
-                   $card->setName($_POST['cardName']);
-               }
-               else
-               {
-                   //ERREUR -> retour en arrière avec le même form
-                   echo "Incorrect input";
-                   return Helper::view("card");
-                   exit();
-               }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (count($_POST) > 0) {
+
+                //CARDNAME
+                if (CardController::controlText($_POST['cardName'])) {
+                    $card->setName($_POST['cardName']);
+                } else {
+                    //ERREUR -> retour en arrière avec le même form
+                    echo "Incorrect input";
+                    return Helper::view("card");
+                    exit();
+                }
 
                 //CARDTYPE
-                if(CardController::controlText($_POST['cardType']))
-                {
+                if (CardController::controlText($_POST['cardType'])) {
                     $card->setType($_POST['cardType']);
-                }
-                else
-                {
+                } else {
                     //ERREUR -> retour en arrière avec le même form
                     echo "Incorrect input";
                     return Helper::view("card");
@@ -67,12 +54,9 @@ class CardController
                 }
 
                 //EXTENSION
-                if(CardController::controlText($_POST['extension']))
-                {
+                if (CardController::controlText($_POST['extension'])) {
                     $card->setExtension($_POST['extension']);
-                }
-                else
-                {
+                } else {
                     //ERREUR -> retour en arrière avec le même form
                     echo "Incorrect input";
                     return Helper::view("card");
@@ -81,65 +65,48 @@ class CardController
 
 
                 //CMC
-                if(isset($_POST['cmc']))
-                {
-                    if(ctype_digit($_POST['cmc']))
-                    {
-                        $card->setCost($_POST['cmc']);   
-                    } 
+                if (isset($_POST['cmc'])) {
+                    if (ctype_digit($_POST['cmc'])) {
+                        $card->setCost($_POST['cmc']);
+                    }
                 }
 
                 //COLORS
 
-                if(isset($_POST['white']))
-                {
-                    $card->setColor($_POST['white']);   
+                if (isset($_POST['white'])) {
+                    $card->setColor($_POST['white']);
                 }
-                if(isset($_POST['blue']))
-                {
-                    $card->setColor($_POST['blue']);   
+                if (isset($_POST['blue'])) {
+                    $card->setColor($_POST['blue']);
                 }
-                if(isset($_POST['black']))
-                {
-                    $card->setColor($_POST['black']);   
+                if (isset($_POST['black'])) {
+                    $card->setColor($_POST['black']);
                 }
-                if(isset($_POST['red']))
-                {
-                    $card->setColor($_POST['red']);   
+                if (isset($_POST['red'])) {
+                    $card->setColor($_POST['red']);
                 }
-                if(isset($_POST['green']))
-                {
-                    $card->setColor($_POST['green']);   
+                if (isset($_POST['green'])) {
+                    $card->setColor($_POST['green']);
                 }
-                
-                if($this->controlText($_POST['description']))
-                {
+
+                if ($this->controlText($_POST['description'])) {
                     $card->setDescription($_POST['description']);
                 }
-                
+
                 $card->save();
                 $id = Card::fetchIdByName($card->getName())['id'];
                 $card->setId($id);
-                foreach($card->getColor() as $c)
-                {
-                    $card->saveColor($c); 
+                foreach ($card->getColor() as $c) {
+                    $card->saveColor($c);
                 }
-                
-                echo "Card added succesfully";
-                $collection = Collection::fetchAll(1);
-                return Helper::view("Collection", ["collection" => $collection]);
-                exit();
 
-            }  
-            else
-            {
-                echo "Incorrect input";
-                $collection = Collection::fetchAll(1);
-                return Helper::view("Collection", ["collection" => $collection]);
+                $array = [$card];
+                return Helper::view("ShowCard", ["card" => $array]);
+                exit();
+            } else {
+                return Helper::view("CardView");
                 exit();
             }
         }
-        
     }
-
 }

@@ -8,12 +8,12 @@ class Collection extends Model
 {
     /***********************
             Attributes
-    ***********************/
+     ***********************/
     private $user_id;
     private $card_id;
     private $quantity;
     private $owned;
-    
+
 
 
     /***********************
@@ -38,7 +38,7 @@ class Collection extends Model
 
     /***********************
             Setters
-    ***********************/
+     ***********************/
     public function setUserId($id)
     {
         $this->user_id = $id;
@@ -64,12 +64,12 @@ class Collection extends Model
         return Collection::readById("user_cards", $id);
     }
 
-    public static function fetchAll($id)
+    public static function fetchAll()
     {
         return Collection::readAll("user_cards");
     }
 
-    public static function fetchQuantity ($card_id, $user_id, $owned)
+    public static function fetchQuantity($card_id, $user_id, $owned)
     {
         $params = [
             "binding" => [
@@ -83,7 +83,7 @@ class Collection extends Model
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
             foreach ($params["binding"] as $key => $value) {
-                $statement->bindParam(":".$key, $value[0], $value[1]);
+                $statement->bindParam(":" . $key, $value[0], $value[1]);
             }
         }
         $statement->execute();
@@ -109,9 +109,9 @@ class Collection extends Model
 
     public function save()
     {
-        
+
         $values_collection_user = [
-            "user_id" => 1, //In the future will have to change to $_SESSION
+            "user_id" => $_SESSION["User_id"],
             "card_id" => $this->card_id,
             "quantity" => $this->quantity,
             "owned" => $this->owned,
@@ -138,7 +138,7 @@ class Collection extends Model
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
             foreach ($params["binding"] as $key => $value) {
-                $statement->bindParam(":".$key, $value[0], $value[1]);
+                $statement->bindParam(":" . $key, $value[0], $value[1]);
             }
         };
         $statement->execute();
@@ -151,7 +151,7 @@ class Collection extends Model
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
             foreach ($params["binding"] as $key => $value) {
-                $statement->bindParam(":".$key, $value[0], $value[1]);
+                $statement->bindParam(":" . $key, $value[0], $value[1]);
             }
         };
         $statement->execute();
@@ -170,12 +170,11 @@ class Collection extends Model
         $str = '<div id="test">';
         $str .= '<img src="public/images/Card.jpg" alt="Blank Card"/>';
         $str .= '<div id="test1">';
-       // $str .= '<div id="card'.$this->card_id.'" class="card>';
-        $str .= '<p>Card id:<label class="id"> '. htmlentities($this->card_id). '</label></p>';
-        $str .= "<p>Card Name: <a class=\"card_name\" href=\"CardCollection?id=". urlencode($this->card_id)."&amp;owned=".urlencode($this->owned)."\">". htmlentities(Card::fetchName($this->card_id)['name']). "</a></p>";
-        $str .= '<p>Quantity: <label class="quantity"> '. htmlentities($this->quantity). '</label></p>';
-        $str .= '<p>Owned: <label class="owned">'. htmlentities($this->owned). '</label></p>';
-        
+        $str .= '<p>Card id:<label class="id"> ' . htmlentities($this->card_id) . '</label></p>';
+        $str .= "<p>Card Name: <a class=\"card_name\" href=\"CardCollection?id=" . urlencode($this->card_id) . "&amp;owned=" . urlencode($this->owned) . "\">" . htmlentities(Card::fetchName($this->card_id)['name']) . "</a></p>";
+        $str .= '<p>Quantity: <label class="quantity"> ' . htmlentities($this->quantity) . '</label></p>';
+        $str .= '<p>Owned: <label class="owned">' . htmlentities($this->owned) . '</label></p>';
+
 
         $str .= '</div></div>';
 
@@ -184,23 +183,20 @@ class Collection extends Model
 
     public function show()
     {
-        if(isset($_GET["id"]) && ctype_digit($_GET["id"]))
-        {
+        if (isset($_GET["id"]) && ctype_digit($_GET["id"])) {
             $card = Card::fetchId($_GET["id"]);
 
-            if($card == null)
-            {
+            if ($card == null) {
                 // raising an exception maybe not the best solution
                 throw new Exception("CARD NOT FOUND.", 1);
             }
-        }
-        else {
+        } else {
             throw new Exception("CARD NOT FOUND.", 1);
         }
 
-        return Helper::view("CardCollection",[
-                'card' => $card,
-            ]);
+        return Helper::view("CardCollection", [
+            'card' => $card,
+        ]);
     }
     
 }

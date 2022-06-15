@@ -104,11 +104,11 @@ class Card extends Model
             $str .= htmlentities($c) . " ";
         }
         $str .= '</label></p>';
-        $str .= '<p>CMC: <label class="card_cost">'. htmlentities($this->cost). '</label></p>';
-        $str .= '<p>Type: <label class="card_type">'. htmlentities($this->type). '</label></p>';
+        $str .= '<p>CMC: <label class="card_cost">' . htmlentities($this->cost) . '</label></p>';
+        $str .= '<p>Type: <label class="card_type">' . htmlentities($this->type) . '</label></p>';
         $str .= '<p>Description: </p>';
-        $str .= '<p id="description"><label  class="card_description">'. htmlentities($this->description). '</label><p>';
-        $str .= '<p>Extension: <label class="card_extension">'. htmlentities($this->extension). '</label></p>';
+        $str .= '<p id="description"><label  class="card_description">' . htmlentities($this->description) . '</label><p>';
+        $str .= '<p>Extension: <label class="card_extension">' . htmlentities($this->extension) . '</label></p>';
         $str .= '</div></div>';
         return $str;
     }
@@ -131,7 +131,7 @@ class Card extends Model
 
     public static function searchCards($params)
     {
-     return Card::search("cards", $params);
+        return Card::search("cards", $params);
         //return Card::readByName("cards","Chandra, Torch of defiance")
     }
 
@@ -177,7 +177,6 @@ class Card extends Model
         }
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
-
     }
 
     public static function fetchColor($card_id)
@@ -222,7 +221,7 @@ class Card extends Model
 
     public static function fetchIdFromColor($params)
     {
-        
+
         $dbh = App::get('dbh');
         $request = "SELECT card_id FROM cards_color WHERE";
         foreach ($params as $key => $value) {
@@ -230,7 +229,7 @@ class Card extends Model
                 $request .= ' ' . $value;
             }
         }
-        $request = $request.";";
+        $request = $request . ";";
         $statement = $dbh->prepare($request);
 
         $statement->execute();
@@ -238,7 +237,7 @@ class Card extends Model
     }
 
 
-    public static function fetchExtension ()
+    public static function fetchExtension()
     {
         $dbh = App::get('dbh');
         $request = "SELECT DISTINCT extension FROM cards";

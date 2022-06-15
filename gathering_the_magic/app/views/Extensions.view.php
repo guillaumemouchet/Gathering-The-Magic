@@ -1,6 +1,7 @@
 <?php
-    $title = "Extensions";
-    require('partials/header.php')
+$title = "Extensions";
+require('partials/header.php');
+Helper::checkLogin();
 ?>
 <h1>Extensions</h1>
 
