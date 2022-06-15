@@ -48,6 +48,7 @@ La découverte de Boostrap (https://getbootstrap.com) à permis une grande facil
 AJAX est l'acronyme pour Ascynchronous JavaScript + XML qui défini une approche de programmation liant un ensemble de technologie dont HTML, CSS, JavaScript, DOM, XML, mais principalement l'objet XMLHttpRequest. Cette technologie permet de mettre à jour l'interface utilisateur rapide dans avoir à recharger la page entièrement.
 La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
 
+
 EXPLICATION AJAX DE CE QU'ON A FAIT NOUS??
 
 ## Maj après le rendu intermédiaire (27.04.22)
@@ -63,7 +64,10 @@ Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le p
 | 1 | Retravailler la BDD pour pour transformer les test_cards en, cards|
 | 2 | Ajout de nouvelles cartes par l'utilisateur  |
 | 3 | Retravailler la recherche avancée |
-| 4 | Notifications lors d'ajout d'une nouvelle carte à la BDD La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
+| 4 | Notifications lors d'ajout d'une nouvelle carte à la BDD | 
+| 5 | Mise en page CSS |
+| 6 | Intégration des utilisateurs |
+| 7 | Gestion de decks |
 
 ## Anciens objectifs généraux priorisés
 
