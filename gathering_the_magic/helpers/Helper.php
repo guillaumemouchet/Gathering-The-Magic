@@ -33,17 +33,20 @@ class Helper
 
     public static function redirect($path)
     {
-        header("Location: /{$path}");
+        header("Location: {$path}");
         exit();
     }
 
     public static function checkLogin()
     {
         if (!isset($_SESSION["User_id"])) {
+
+            //Afficher dans le helper a l'aide de la SESSION et pas par des alerts!!!
             echo '<script language="javascript">';
             echo 'alert("Please Login before accessing this page");';
-            echo 'window.location = "home"';
             echo '</script>';
+            Helper::redirect("login");
+            exit();
         }
     }
 }

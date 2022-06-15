@@ -8,7 +8,7 @@ Helper::checkLogin();
 
 <?php echo $card[0]->asHTMLFlexBoxItem(); ?>
 <hr>
-<form method="post">
+<form class="form_display" method="post">
     <label>Add/remove <input type="number" id="quantity" name="quantity" value="1" min="1" max="100"></label>
 
     <input type="hidden" id="card_id" name="card_id" value="<?php echo htmlentities($card[0]->getId()); ?>">

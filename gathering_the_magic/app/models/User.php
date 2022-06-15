@@ -18,7 +18,6 @@ class User extends Model
         if (-1 != $userId) {
             $_SESSION['User_id'] = $userId;
             $_SESSION['Username'] = $name;
-            //setcookie("User_id", $userId, time() + 3600);
             return true;
         } else {
 

@@ -47,6 +47,6 @@ require('partials/header.php');
     <label id="btnSubmit"><input type="submit" name="search" value="Search" /></label>
 
 </form>
-<form id="btnSubmit" method="post" action="new_card">
+<form class="form_display" id="btnSubmit" method="post" action="new_card">
     <input type="submit" name="add" value="Add new Card!" />
 </form>

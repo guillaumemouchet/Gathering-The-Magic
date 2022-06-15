@@ -27,7 +27,7 @@ if (sizeof($collection) > 0) {
 <?php
 	}
 ?>
-<form id="btnSubmit" method="post" action="advanced_research">
+<form class="form_display" id="btnSubmit" method="post" action="advanced_research">
 	<input type="submit" name="add" value="Search Card!" />
 </form>
 

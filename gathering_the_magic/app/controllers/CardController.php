@@ -75,13 +75,12 @@ class CardController
                 if (isset($_POST['cmc'])) {
                     if (ctype_digit($_POST['cmc'])) {
                         $card->setCost($_POST['cmc']);
-                    }else
-                    {
+                    } else {
                         echo '<script language="javascript">';
                         echo 'alert("Incorrect Input");';
                         echo '</script>';
                         return Helper::view("Card", ["colors" => $colors]);
-                        exit(); 
+                        exit();
                     }
                 }
 
@@ -114,8 +113,7 @@ class CardController
 
                 if (CardController::controlText($_POST['description'])) { // A card can have no description
                     $card->setDescription($_POST['description']);
-                }else
-                {
+                } else {
                     $card->setDescription("");
                 }
                 try
@@ -141,8 +139,10 @@ class CardController
                     exit();
                 }
 
-
-
+                $array = [$card];
+                Helper::redirect("card?id=' . urlencode($id) . '");
+                return Helper::view("ShowCard", ["card" => $array]);
+                exit();
             } else {
                 return Helper::view("CardView");
                 exit();
