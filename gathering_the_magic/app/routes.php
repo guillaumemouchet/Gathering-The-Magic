@@ -2,7 +2,8 @@
 
 $router->define([
   // '' => 'controllers/index.php',  // by conventions all controllers are in 'controllers' folder
-  '' => 'IndexController',
+  '' => 'loginController',
+  'login' => 'loginController',
   'index' => 'IndexController',
   'advanced_research' => 'AdvancedResearchController',
   'collection' => 'CollectionController',

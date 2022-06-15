@@ -9,29 +9,50 @@
 
     <label>Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+"/></label>
     <!-- The rest of the form is disabled for the moment since we want to work with the API for the research later on -->
-    <label>Card type: <input type="text" id="cardType" name="cardType" disabled/></label>
+    <label id="title">Card type: <input type="text" id="cardType" name="cardType" pattern="[^%]+"/></label>
 
-    <label for="extension">Extension: </label>
-    <!-- Selector will be completed with the API integration -->
-    <select name="extension" id="extension" disabled>
-        <option value="magicOrigins">Magic Origins</option>
-        <option value="jumpstart">Jumpstart</option>
+    <div class="wrapper">
+    <label id="title"  for="extension">Extension: </label>
+    <!-- Selector will be completed with the API integration str_replace(' ','',$extension)-->
+    <select  name="extension" id="extension">
+    <option value=""></option>
+
+    <?php
+    
+    if(sizeof($extensions) > 0)
+        {
+            foreach ($extensions as $extension) {       
+            ?>
+           <option value=<?=str_replace(' ','_',$extension)?>><?=$extension?></option> <!-- getting rid of whitespaces for the name-->
+               <?php
+            }
+        }?>
     </select>
+    </div>
 
-    <label>Color: </label> 
-    <label>White<input type="checkbox" id="white" name="white" disabled/></label>
-    <label>Blue<input type="checkbox" id="blue" name="blue" disabled/></label>
-    <label>Black<input type="checkbox" id="black" name="black" disabled/></label>
-    <label>Red<input type="checkbox" id="red" name="red" disabled/></label>
-    <label>Green<input type="checkbox" id="green" name="green" disabled/></label>
+    <label id="title">Color: </label> 
+    <?php
+    if(sizeof($colors) > 0)
+        {
+            foreach ($colors as $color) {       
+            ?>
+                <label id="color"><input type="checkbox" id=<?=$color?> name=<?=$color?> value=<?=$color?>/><?=$color?></label>
 
-    <label for="format">Format</label>
-    <!-- Selector will be completed with the API integration -->
+               <?php
+            }
+        }?>
+
+    <label id="title">Description: <input type="text" id="description" name="description" pattern="[^%]+"/></label>
+
+    <!--
+    <div class="wrapper">
+    <label  id="title"for="format">Format:</label>
+     Selector will be completed with the API integration 
     <select name="format" id="format" disabled>
         <option value="standard">Standard</option>
         <option value="modern">Modern</option>
     </select>
+    </div>-->
+    <label id="btnSubmit"><input type="submit" name="search" value="Search"/></label>
 
-    <input type="submit" name="search" value="Search"/>
-    
 </form>

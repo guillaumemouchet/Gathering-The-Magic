@@ -12,6 +12,8 @@ abstract class Model
         $this->$name = $value;
     }
 
+
+
     /**
      * Insertion into DB: INSERT INTO
      * @param String $table Table name
@@ -86,7 +88,6 @@ abstract class Model
     protected static function readByName($table, $name)
     {
         $dbh = App::get('dbh');
-        echo "reading".$name;
         $statement = $dbh->prepare("SELECT * FROM {$table} WHERE name LIKE %:model_name%;");
         $statement->bindParam(':model_name', $name);
         $statement->execute();
@@ -120,21 +121,34 @@ abstract class Model
         $request = "SELECT * FROM {$table} WHERE ";
         foreach ($params as $key => $value) {
             if ($key != "binding") {
-                $request = $request . " " . $value;
+                $request = $request . ' ' . $value;
             }
         }
         $request = $request.";";
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
+            $arrayTemp = array();
+            $i = 0;
             foreach ($params["binding"] as $key => $value) {
-                $test = "%{$value[0]}%";
-                $statement->bindParam(":".$key, $test, $value[1]);
+
+                if(preg_match("/id./",$key) == 1)
+                {
+                    array_push($arrayTemp,"{$value[0]}");//Since bindParam need a reference, we need to use an array
+
+                }else{
+                    array_push($arrayTemp,"%{$value[0]}%");//Since bindParam need a reference, we need to use an array
+
+                }
+                $statement->bindParam(':'.$key, $arrayTemp[$i++] , $value[1]);
             }
         }
+
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, get_called_class());
     }
 
+
+    
     protected static function exists($table, $params)
     {
         $dbh = App::get('dbh');
@@ -198,4 +212,6 @@ abstract class Model
 
         $statement->execute();
     }
+
+    
 }
