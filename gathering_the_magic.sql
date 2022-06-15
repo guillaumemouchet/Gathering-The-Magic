@@ -80,6 +80,22 @@ CREATE TABLE `decks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+<<<<<<< HEAD
+=======
+INSERT INTO `test_card` (`id`, `name`, `color`, `cost`, `type`, `description`, `extension`) VALUES
+(1,	'Chandra, Torch of defiance',	'R',	4,	'Legendary Planeswalker - Chandra',	'+1 - deal 2 damages to any target',	'Magic Origins'),
+(2,	'Yuriko, Tiger\'s shadow',	'B',	3,	'Legendary Creature - Ninja',	'{B}{U} Ninjutsu',	'Commander 2018'),
+(3,	'Hamza, Guardian of Arashin',	'W',	6,	'Legendary Creature - Elephant',	'This spell cost 1 less to cast for each creature with +1/+1 counter on it.',	'Commander Legends'),
+(4,	'Sol Ring',	'C',	1,	'Artifact',	'{tap} add {C}{C}',	'Commander Collection Green'),
+(5,	'Soul of the Harvest',	'G',	6,	'Creature - Elemental',	'Tample',	'Jumpstart'),
+(6,	'Victory\'s Envoy',	'W',	5,	'Creature - Human Cleric',	'At the beginning of your upkeep put a +1/+1 counter on each creature you control.',	'Theros beyond Death'),
+(7,	'Beast Whisperer',	'G',	4,	'Creature - Elf Druid',	'Whenever you cast a creature spell draw a card',	'Time Spiral'),
+(8,	'Cathars\' Crusage',	'W',	5,	'Enchantment',	'Whenever a creature enter the battlefield under your control, put a +1/+1 counter on each creature you control.',	'Jumpstart'),
+(9,	'Asmoranomardicadaistinaculdacar',	'R',	0,	'Legendary Creature - Human',	'As long as you\'ve discarded a card this turn you may pay {B}{R} to cast this card.',	'Modern Horizon 2'),
+(10,	'Feasting Troll King',	'G',	6,	'Creature - Troll Noble',	'Vigilance, trample',	'Throne of Eldraine'),
+(11,	'Cauldron Familiar',	'B',	1,	'Creature - Cat',	'Whenever it enter the battlefield deal 1 damage to target opponent and gain 1 life.',	'Throne of Eldraine'),
+(12,	'Counterspell',	'U',	2,	'Instant',	'Counter target spell',	'M20');
+>>>>>>> 70b28ca (New SQL dump)
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -105,8 +121,13 @@ CREATE TABLE `user_cards` (
   CONSTRAINT `user_cards_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `cards` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+<<<<<<< HEAD
 INSERT INTO `user_cards` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
 (1,	1,	6,	'true');
+=======
+INSERT INTO `user_collection` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
+(1,	4,	4,	'true');
+>>>>>>> 70b28ca (New SQL dump)
 
 DROP TABLE IF EXISTS `user_deck`;
 CREATE TABLE `user_deck` (
@@ -123,4 +144,8 @@ CREATE TABLE `user_deck` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+<<<<<<< HEAD
 -- 2022-05-04 07:30:44
+=======
+-- 2022-04-24 15:53:53
+>>>>>>> 70b28ca (New SQL dump)
