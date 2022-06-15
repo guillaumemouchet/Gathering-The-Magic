@@ -98,7 +98,6 @@ abstract class Model
     protected static function getIdByName($table, $name)
     {
         $dbh = App::get('dbh');
-        echo "reading" . $name;
         $statement = $dbh->prepare("SELECT id FROM {$table} WHERE name = :model_name;");
         $statement->bindParam(':model_name', $name);
         $statement->execute();
@@ -125,7 +124,6 @@ abstract class Model
             }
         }
         $request = $request . ";";
-        echo $request;
         $statement = $dbh->prepare($request);
         if (isset($params["binding"])) {
             $arrayTemp = array();
@@ -139,7 +137,7 @@ abstract class Model
                     array_push($arrayTemp, "%{$value[0]}%"); //Since bindParam need a reference, we need to use an array
 
                 }
-                echo $value[0]. "      ". $value[1];
+                 $value[0]. "      ". $value[1];
                 $statement->bindParam(':' . $key, $arrayTemp[$i++], $value[1]);
             }
         }
@@ -226,7 +224,6 @@ abstract class Model
             }
         }
         $request = $request . ";";
-        echo $request;
         $statement = $dbh->prepare($request);
 
         if (isset($params["binding"])) {

@@ -101,15 +101,20 @@ class Card extends Model
         $str .= '<p><label class="card_color"> Color identity: ';
         $assoc = Card::fetchColor($this->id);
         foreach ($assoc as $c) {
-            $str .= htmlentities($c) . " ";
+            $str .= "<a>".htmlentities($c) . " ";
         }
-        $str .= '</label></p>';
-        $str .= '<p>CMC: <label class="card_cost">' . htmlentities($this->cost) . '</label></p>';
-        $str .= '<p>Type: <label class="card_type">' . htmlentities($this->type) . '</label></p>';
-        $str .= '<p>Description: </p>';
-        $str .= '<p id="description"><label  class="card_description">' . htmlentities($this->description) . '</label><p>';
-        $str .= '<p>Extension: <label class="card_extension">' . htmlentities($this->extension) . '</label></p>';
-        $str .= '</div></div>';
+        $str .= '</a></p>';
+        $str .= '<p class="card-text">CMC: <a>' . htmlentities($this->cost) . '</a></p>';
+        $str .= '<p class="card-text">Type: <a>' . htmlentities($this->type) . '</a></p>';
+        $str .= '<p class="card-text">Description: </p>';
+        $str .= '<p>' . htmlentities($this->description) . '</p>';
+        $str .= '<p class="card-text">Extension: <a>' . htmlentities($this->extension) . '</a></p>';
+        $str .= '</div>';
+        $str .= '  </div>';
+        $str .= ' </div>';
+        $str .= ' </div>';
+
+
         return $str;
     }
 
