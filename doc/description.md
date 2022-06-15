@@ -63,7 +63,6 @@ Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le p
 | 2 | Ajout de nouvelles cartes par l'utilisateur  |
 | 3 | Retravailler la recherche avancée |
 | 4 | Notifications lors d'ajout d'une nouvelle carte à la BDD La mise en place de notre ajax permet de mettre à jour de manière asynchrone un affichage annonçant aux utilisateurs qu'une ou plusieurs nouvelles cartes ont été ajoutées à la base de données, une fois que l'utilisateur à visionné les cartes elles ne seront plus affichées comme récemment ajoutée.
-
 ## Maj après le rendu intermédiaire (27.04.22)
 
 Nous pensons qu'intégrer l'API est trop ambitieux. Nous allons réorienter le projet avec de nouveaux objectifs:

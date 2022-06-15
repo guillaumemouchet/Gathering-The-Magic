@@ -5,13 +5,14 @@ require('partials/header.php');
 
 <h1>Advanced research</h1>
 
-<form method="get" action="parse_search_form">
-
-    <label>Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+"/></label>
-    <!-- The rest of the form is disabled for the moment since we want to work with the API for the research later on -->
-    <label id="title">Card type: <input type="text" id="cardType" name="cardType" pattern="[^%]+"/></label>
-
-    <div class="wrapper">
+<form class="form_display" method="get" action="parse_search_form">
+    <div class="mb">
+        <label id="title">Card name: <input type="text" id="cardName" name="cardName" pattern="[^%]+" /></label>
+    </div>
+    <div class="mb">
+        <label id="title">Card type: <input type="text" id="cardType" name="cardType" pattern="[^%]+" /></label>
+    </div>
+    <div class="mb">
         <label id="title" for="extension">Extension: </label>
         <select name="extension" id="extension">
             <option value=""></option>

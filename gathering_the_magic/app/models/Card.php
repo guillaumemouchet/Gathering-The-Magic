@@ -90,15 +90,15 @@ class Card extends Model
     public function asHTMLFlexBoxItem()
     {
 
-
-        $str = '';
-        $str .= '<p><label class="card_id"> Card id: '. urlencode($this->id). '</label></p>';
-
-        $str .= '<label class="card_color">';
-
-       
-
-        $str .= '<p><label class="card_color"> Color identity: ';
+        $str = '<div class="card mx-1">';
+        $str .= '<div class="row g-0">';
+        $str .= '<div class="col-mx-5">';
+        $str .= '<img src="public/images/Card.jpg" class="img-fluid rounded-start" alt="Blank Card">';
+        $str .= '</div>';
+        $str .= '<div class="card-body">';
+        //$str .= '<h5 class="card-title">Card id: <label class="card_id">' . urlencode($this->id) . '</label></h5>';
+        $str .= '<h5 class="card-text"> Card name: <a class="card_name" href="card?id=' . urlencode($this->id) . '">' . htmlentities($this->name) . "</a></h5>";
+        $str .= '<p class="card-text">Color identity: ';
         $assoc = Card::fetchColor($this->id);
         foreach ($assoc as $c) {
             $str .= "<a>".htmlentities($c) . " ";

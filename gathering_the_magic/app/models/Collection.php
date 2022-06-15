@@ -152,14 +152,6 @@ class Collection extends Model
         $statement->execute();
     }
 
-    /**
-     * Cleans the collection table when cards are no longer needed in the user_collection table
-     */
-    public static function removeCollection($card_id)
-    {
-        Collection::delete("collection", $card_id);
-    }
-
     public function asHTMLFlexBoxItem()
     {
         $str = '<div class="card mx-1">';

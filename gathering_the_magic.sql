@@ -153,11 +153,6 @@ INSERT INTO `user_cards` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
 (2,	30,	1,	'true'),
 (2,	45,	5,	'false');
 
-INSERT INTO `user_cards` (`user_id`, `card_id`, `quantity`, `owned`) VALUES
-(1,	3,	3,	'false'),
-(1,	4,	1,	'true');
-
-
 DROP TABLE IF EXISTS `user_deck`;
 CREATE TABLE `user_deck` (
   `user_id` int(11) NOT NULL,
@@ -172,3 +167,8 @@ CREATE TABLE `user_deck` (
   CONSTRAINT `user_deck_ibfk_3` FOREIGN KEY (`card_id`) REFERENCES `cards` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+<<<<<<< HEAD
+=======
+
+-- 2022-06-15 06:21:57
+>>>>>>> 55e90e4acae98e3f2e9ea395ddaea8eb923fecdd
